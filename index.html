@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah - Professional Front-End Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* CSS Variables and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            --light: #0f172a;
+            --text: #e2e8f0;
+            --text-light: #94a3b8;
+            --dark: #f8fafc;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode nav {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero-text .typing {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            min-height: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s 0.4s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        body.dark-mode .floating-card {
+            background: #1e293b;
+        }
+
+        .card-1 {
+            top: 10%;
+            right: 0%;
+        }
+
+        .card-2 {
+            bottom: 20%;
+            left: -28%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .skill-card {
+            background: #1e293b;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+        }
+
+        .skill-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        body.dark-mode .progress-bar {
+            background: #334155;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            width: 0;
+        }
+
+        .skill-card.animate .progress-fill {
+            width: var(--progress);
+        }
+
+        /* Projects Section */
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--text);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+            /* ADDED for smoother filtering transition */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        body.dark-mode .project-card {
+            background: #1e293b;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ADDED: Class for hiding cards during filtering */
+        .project-card.hide {
+            opacity: 0 !important;
+            transform: scale(0.9) !important;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            /* Hide immediately after 0.3s transition */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, height 0s 0.3s, padding 0s 0.3s, margin 0s 0.3s, visibility 0s 0.3s;
+            visibility: hidden;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            flex: 1;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .link-demo {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .link-code {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--text);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .info-card {
+            background: #1e293b;
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+        }
+
+        .info-icon {
+            font-size: 2rem;
+
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode .contact-form {
+            background: #1e293b;
+        }
+
+        /* ADDED: CSS for full-width button */
+        .contact-form .btn-primary {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: var(--light);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            border-color: #334155;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        body.dark-mode footer {
+            background: #1e293b;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">💻 Abdullah</div>
+            <ul class="nav-links" role="menubar">
+                <li><a href="#home" role="menuitem">Home</a></li>
+                <li><a href="#skills" role="menuitem">Skills</a></li>
+                <li><a href="#projects" role="menuitem">Projects</a></li>
+                <li><a href="#contact" role="menuitem">Contact</a></li>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle website theme between dark and light mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero" aria-labelledby="hero-title">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 id="hero-title">Hi, I'm Abdullah</h1>
+                <div class="typing" id="typing"></div>
+                <p>Crafting beautiful, responsive, and user-friendly web experiences with modern technologies. Let's build something amazing together! 🚀</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> View My Work
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=800&fit=crop" alt="Abstract view of code on a laptop screen, symbolizing web development" class="profile-img">
+                <div class="floating-card card-1">
+                    <i class="fas fa-code" style="color: var(--primary); font-size: 1.5rem;"></i>
+                    <div style="margin-top: 0.5rem; font-weight: 600;">Clean Code</div>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-rocket" style="color: var(--accent); font-size: 1.5rem;"></i>
+                    <div style="margin-top: 0.5rem; font-weight: 600;">Fast Loading</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-title">
+        <h2 class="section-title" id="skills-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-progress="90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                <div class="skill-header">
+                    <i class="fab fa-html5 skill-icon" style="color: #e34c26;"></i>
+                    <span class="skill-name">HTML5</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-card" data-progress="85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                <div class="skill-header">
+                    <i class="fab fa-css3-alt skill-icon" style="color: #264de4;"></i>
+                    <span class="skill-name">CSS3</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-card" data-progress="80" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <div class="skill-header">
+                    <i class="fab fa-js skill-icon" style="color: #f0db4f;"></i>
+                    <span class="skill-name">JavaScript</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-card" data-progress="75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <div class="skill-header">
+                    <i class="fab fa-react skill-icon" style="color: #61dafb;"></i>
+                    <span class="skill-name">React.js</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 75%;"></div>
+                </div>
+            </div>
+            <div class="skill-card" data-progress="85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                <div class="skill-header">
+                    <i class="fab fa-git-alt skill-icon" style="color: #f34f29;"></i>
+                    <span class="skill-name">Git & GitHub</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-card" data-progress="70" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                <div class="skill-header">
+                    <i class="fas fa-mobile-alt skill-icon" style="color: var(--primary);"></i>
+                    <span class="skill-name">Responsive Design</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="--progress: 70%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-title">
+        <h2 class="section-title" id="projects-title">Featured Projects</h2>
+        <div class="project-filters" role="group" aria-label="Project filtering buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="javascript">JavaScript</button>
+            <button class="filter-btn" data-filter="react">React</button>
+        </div>
+        <div aria-live="polite" id="filter-status" style="clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px;"></div>
+
+        <div class="projects-grid">
+            <div class="project-card" data-category="javascript">
+                <img src="images/calculator.png" alt="Screenshot of a simple digital calculator interface" class="project-img">
+                <div class="project-info">
+                    <h3 class="project-title">🧮 Simple Calculator</h3>
+                    <p class="project-desc">A functional calculator with beautiful UI and smooth animations</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo: Simple Calculator">Live Demo</a>
+                        <a href="#" class="link-code" target="_blank" rel="noopener noreferrer" aria-label="Source Code on GitHub: Simple Calculator">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="javascript">
+                <img src="images/rock-paper-scissor.png" alt="Screenshot of a Rock Paper Scissors game interface" class="project-img">
+                <div class="project-info">
+                    <h3 class="project-title">✊ Rock Paper Scissors</h3>
+                    <p class="project-desc">Interactive game with score tracking and animations</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo: Rock Paper Scissors Game">Live Demo</a>
+                        <a href="#" class="link-code" target="_blank" rel="noopener noreferrer" aria-label="Source Code on GitHub: Rock Paper Scissors Game">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="javascript">
+                <img src="images/daily-expense-tracker.png" alt="Screenshot of a financial expense tracker application interface" class="project-img">
+                <div class="project-info">
+                    <h3 class="project-title">💸 Expense Tracker</h3>
+                    <p class="project-desc">Track daily expenses with visual charts and reports</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo: Expense Tracker">Live Demo</a>
+                        <a href="#" class="link-code" target="_blank" rel="noopener noreferrer" aria-label="Source Code on GitHub: Expense Tracker">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="react">
+                <img src="images/twitter.png" alt="Screenshot of a Twitter clone social media feed" class="project-img">
+                <div class="project-info">
+                    <h3 class="project-title">🐦 Twitter Clone</h3>
+                    <p class="project-desc">Fully functional Twitter clone with modern UI</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Tailwind</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo: Twitter Clone">Live Demo</a>
+                        <a href="#" class="link-code" target="_blank" rel="noopener noreferrer" aria-label="Source Code on GitHub: Twitter Clone">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="react">
+                <img src="images/stop-watch.png" alt="Screenshot of a digital stopwatch interface" class="project-img">
+                <div class="project-info">
+                    <h3 class="project-title">Stop watch</h3>
+                    <p class="project-desc">Fully functional stop watch</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo: Stop Watch">Live Demo</a>
+                        <a href="#" class="link-code" target="_blank" rel="noopener noreferrer" aria-label="Source Code on GitHub: Stop Watch">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card" data-category="react">
+                <img src="images/unit-converter.png" alt="Screenshot of a digital unit converter application" class="project-img">
+                <div class="project-info">
+                    <h3 class="project-title">Unit converter</h3>
+                    <p class="project-desc">Fully functional unit-converter</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo: Unit Converter">Live Demo</a>
+                        <a href="#" class="link-code" target="_blank" rel="noopener noreferrer" aria-label="Source Code on GitHub: Unit Converter">Source Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+        <h2 class="section-title" id="contact-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-card">
+                    <i class="fas fa-envelope info-icon"></i>
+                    <div>
+                        <h3>Email</h3>
+                        <p>contactabdullahislam@gmail.com</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <i class="fab fa-whatsapp info-icon"></i>
+                    <div>
+                        <h3>WhatsApp</h3>
+                        <p>+92 312 6073354</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Lahore, Pakistan</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-cta">
+            <p>Ready to start a project? Let's build something amazing together! 🤝</p>
+            <a href="#contact" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Hire Me
+            </a>
+        </div>
+
+        <div class="social-links">
+            <a href="#" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="WhatsApp Contact"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="copyright-text">© 2025 Abdullah | Front-End Developer</p>
+    </footer>
+
+    <button class="scroll-top" onclick="scrollToTop()" aria-label="Scroll to top of page">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // --- 1. Typing Animation (No changes needed, it's efficient) ---
+        const typingElement = document.getElementById('typing');
+        const texts = [
+            "Crafting fast, accessible, and responsive web applications.",
+            "Building modern user interfaces with React and core web technologies.",
+            "Writing clean, maintainable, and highly performant front-end code."
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentText = texts[textIndex];
+            let display = currentText;
+
+            if (isDeleting) {
+                display = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                display = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            typingElement.textContent = display;
+
+            let typingSpeed = 100;
+
+            if (isDeleting) {
+                typingSpeed /= 2; // Faster deletion
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typingSpeed = 2000; // Pause at end of sentence
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500; // Pause before starting new sentence
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+
+        // --- 2. Theme Toggle (No changes needed, it's functional) ---
+        const themeToggleBtn = document.querySelector('.theme-toggle');
+
+        window.toggleTheme = function () {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+            // Update icon based on mode
+            themeToggleBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Apply saved theme on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+
+            // Start typing animation after initial setup
+            type();
+        });
+
+        // --- 3. Scroll-to-Top Button (No changes needed, it's functional) ---
+        const scrollTopButton = document.querySelector('.scroll-top');
+
+        window.onscroll = function () {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                scrollTopButton.classList.add('show');
+            } else {
+                scrollTopButton.classList.remove('show');
+            }
+        };
+
+        window.scrollToTop = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // --- 4. Intersection Observer for Animations (Skills) (Original robust code retained) ---
+        const skillCards = document.querySelectorAll('.skill-card');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2 // Trigger when 20% of the item is visible
+        };
+
+        const skillObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    const progress = card.getAttribute('data-progress');
+                    // Set the CSS variable to trigger the progress animation
+                    card.style.setProperty('--progress', `${progress}%`);
+                    card.classList.add('animate');
+
+                    // Update ARIA value for accessibility when skill animates
+                    card.setAttribute('aria-valuenow', progress);
+                    
+                    observer.unobserve(card); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        skillCards.forEach(card => {
+            skillObserver.observe(card);
+        });
+
+        // --- 5. Project Filtering (Added A11y announcement) ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        const filterStatus = document.getElementById('filter-status'); // New element for A11y
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove 'active' class from all buttons and add to the clicked one
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+                let visibleCount = 0;
+
+                projectCards.forEach(card => {
+                    const isVisible = filterValue === 'all' || card.getAttribute('data-category') === filterValue;
+
+                    if (isVisible) {
+                        card.classList.remove('hide');
+                        card.setAttribute('aria-hidden', 'false'); // A11y: show element
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hide');
+                        card.setAttribute('aria-hidden', 'true'); // A11y: hide element
+                    }
+                });
+
+                // Announce to screen readers that the list has been filtered
+                if (filterStatus) {
+                    const filterName = filterValue === 'all' ? 'All' : filterValue.charAt(0).toUpperCase() + filterValue.slice(1);
+                    filterStatus.textContent = `${visibleCount} projects filtered by ${filterName}.`;
+                }
+            });
+        });
+
+        // --- 6. Contact Form Submission (Prevent Default) ---
+        // --- 6. Contact Form Submission (Connect to Google Sheet via Apps Script) ---
+
+const contactForm = document.getElementById('contactForm');
+
+// 🚨 IMPORTANT: Replace this placeholder with the actual Web App URL you get from Apps Script Deployment.
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw-nVwgK4zG_IZ1Zf3Q8a92EL0kiET9tk4HaNcZG0x2BRgEuTsKvq_9EWo2hOMDDbbfhg/exec'; 
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        // Prevent the default browser form submission (which would navigate away)
+        e.preventDefault();
+
+        // Show a loading/submitting message (Optional, but good UX)
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        // 1. Collect all form data
+        const formData = new FormData(contactForm);
+
+        // 2. Send the data to the Google Apps Script URL using the fetch API
+        fetch(GOOGLE_SHEET_URL, {
+            method: 'POST',
+            body: formData // FormData object is automatically formatted for Apps Script
+        })
+        .then(response => response.json()) // The Apps Script returns JSON ({'result': 'success'})
+        .then(data => {
+            // 3. Handle the response
+            if (data.result === 'success') {
+                alert('✅ Success! Your message has been sent to Abdullah.');
+                contactForm.reset(); // Clear the form fields
+            } else {
+                // If the script returned an error
+                alert('❌ Submission Error: Could not save data. Check your Apps Script logs.');
+            }
+        })
+        .catch(error => {
+            console.error('Network Error:', error);
+            alert('🚨 Network problem: Could not connect to the submission service.');
+        })
+        .finally(() => {
+            // Re-enable the button and restore original text
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        });
+    });
+}
+    </script>
+</body>
+
+</html>
