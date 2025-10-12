@@ -5,6 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Abdullah - Professional Front-End Developer</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="website_tab_icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="website_tab_icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="website_tab_icon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         /* ============================
@@ -17,7 +21,7 @@
             --dark: #0f172a;
             --light: #f8fafc;
             --text: #1e293b;
-            --text-light: #64748b;
+            --text-light: #000000;
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --backdrop: rgba(0, 0, 0, 0.45);
         }
@@ -205,7 +209,8 @@
         }
 
         .typing {
-            font-size: 1.05rem;
+            font-size: 2rem;
+            font-weight: 500;
             color: var(--text-light);
             min-height: 2.4rem;
             margin-bottom: 1rem
@@ -445,7 +450,7 @@
         .project-links a {
             text-decoration: none;
             background: var(--gradient);
-            color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
             padding: 0.6rem 1.2rem;
             margin-top: 20px;
             border-radius: 50px;
@@ -453,10 +458,10 @@
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
-
+        
         .project-links a:hover {
             background: white;
-            color: var(--accent-color);
+            color: black;
             border: 1px solid purple;
         }
 
@@ -502,11 +507,15 @@
        CONTACT
        ============================ */
         .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
-            align-items: start
+            display: flex;
+            justify-content: center;
+            /* horizontally center */
+            align-items: center;
+            /* vertically center */
+            min-height: 400px;
+            /* form ke liye height, adjust kar sakte ho */
         }
+
 
         .info-card {
             background: var(--gradient);
@@ -519,16 +528,25 @@
             align-items: center;
         }
 
+        .must {
+            color: red;
+        }
+
         body.dark-mode .info-card {
             background: #1e293b
         }
 
         .contact-form {
-            background: white;
-            padding: 1rem;
-            border-radius: 12px;
-            box-shadow: 0 6px 22px rgba(0, 0, 0, .06);
+            width: 100%;
+            max-width: 500px;
+            /* form ki max width */
+            background-color: #f8f8f8;
+            /* optional background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
         }
+
 
         body.dark-mode .contact-form {
             background: #1e293b
@@ -751,6 +769,19 @@
             background-color: #fdecea;
         }
 
+        /* Dark mode invalid state */
+        body.dark-mode input.invalid,
+        body.dark-mode textarea.invalid {
+            border-color: #e74c3c;
+            /* lighter red for dark background */
+            background-color: #fdecea;
+            /* dark red shade */
+            color: #fff;
+            /* text color for visibility */
+        }
+
+
+
         /* Smooth animation */
         .invalid {
             transition: border-color 0.3s ease, background-color 0.3s ease;
@@ -827,8 +858,7 @@
                     </div>
                 </div>
                 <div class="hero-image" aria-hidden="true">
-                    <img class="profile-img"
-                        src="images/my_pic.jpg"
+                    <img class="profile-img" src="images/my_pic.jpg"
                         alt="Abstract view of code on a laptop screen, symbolizing web development">
                     <div class="floating-card card-1"><i class="fas fa-code"
                             style="color:var(--primary)"></i><span>Clean Code</span></div>
@@ -950,7 +980,8 @@
 
                 <!-- ✊🖐✌ Rock Paper Scissor -->
                 <div class="project-card" data-category="javascript">
-                    <img class="project-img" src="images/rock-paper-scissor.png" alt="Screenshot: Rock Paper Scissor Game">
+                    <img class="project-img" src="images/rock-paper-scissor.png"
+                        alt="Screenshot: Rock Paper Scissor Game">
                     <div class="project-info">
                         <h3 class="project-title">✊🖐✌ Rock Paper Scissor</h3>
                         <p class="project-desc">Fun interactive game against the computer with score tracking.</p>
@@ -1007,15 +1038,15 @@
                 </div>
 
                 <!-- 🐦 Twitter Clone -->
-                <div class="project-card" data-category="frontend">
+                <div class="project-card" data-category="react">
                     <img class="project-img" src="images/twitter.png" alt="Screenshot: Twitter Clone">
                     <div class="project-info">
                         <h3 class="project-title">🐦 Twitter Clone</h3>
                         <p class="project-desc">Frontend clone of Twitter with tweet post, like, and comment UI
                             features.</p>
                         <div class="tech-stack">
-                            <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span
-                                class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span><span class="tech-tag">TAILWIND CSS</span><span
+                                class="tech-tag">REACT JS</span>
                         </div>
                         <div class="project-links">
                             <a class="link-demo" href="https://abdullahislam123.github.io/twitter-clone/"
@@ -1035,34 +1066,13 @@
         <section id="contact" aria-labelledby="contact-title">
             <h2 class="section-title" id="contact-title">Get In Touch</h2>
             <div class="contact-container">
-                <div class="contact-info">
-                    <div class="info-card"><i class="fas fa-envelope info-icon"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>contactabdullahislam@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="info-card"><i class="fab fa-whatsapp info-icon"></i>
-                        <div>
-                            <h3>WhatsApp</h3>
-                            <p>+92 312 6073354</p>
-                        </div>
-                    </div>
-                    <div class="info-card"><i class="fas fa-map-marker-alt info-icon"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Lahore, Pakistan</p>
-                        </div>
-                    </div>
-                </div>
-
                 <form id="contactForm" class="contact-form" novalidate>
-                    <div class="form-group"><label for="name">Name</label><input id="name" name="name" type="text"
-                            required></div>
-                    <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email"
-                            required></div>
-                    <div class="form-group"><label for="message">Message</label><textarea id="message" name="message"
-                            rows="5" required></textarea></div>
+                    <div class="form-group"><label for="name">Name<span class="must">*</span></label><input id="name"
+                            name="name" type="text" required></div>
+                    <div class="form-group"><label for="email">Email<span class="must">*</span></label><input id="email"
+                            name="email" type="email" required></div>
+                    <div class="form-group"><label for="message">Message<span class="must">*</span></label><textarea
+                            id="message" name="message" rows="5" required></textarea></div>
                     <button type="submit" class="btn btn-primary "><i class="fas fa-paper-plane"></i> Send
                         Message</button>
                 </form>
@@ -1073,9 +1083,13 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-cta">
-            <p>Ready to start a project? Let's build something amazing together! 🤝</p>
-            <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a>
+            <h3>Let's create something amazing!</h3>
+            <p>Have a project in mind? I'm just a click away. 🚀</p>
+            <a href="#contact" class="btn btn-outline-primary">
+                <i class="fas fa-comment-dots"></i> Get in Touch
+            </a>
         </div>
+
 
         <div class="social-links" role="navigation" aria-label="Social links">
             <a href="https://github.com/abdullahislam123" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -1106,7 +1120,7 @@
             const scrollTopBtn = document.getElementById('scrollTopBtn');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const projectCards = document.querySelectorAll('.project-card');
-            const filterStatus = document.getElementById('filter-status');
+            const filterStatus = document.querySelector('#filter-status');
             const skillCards = document.querySelectorAll('.skill-card');
             const typingElement = document.getElementById('typing');
             const contactForm = document.getElementById('contactForm');
@@ -1234,20 +1248,41 @@
             --------------------- */
             filterButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
                     filterButtons.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
+
                     const filter = btn.getAttribute('data-filter');
                     let visible = 0;
+
                     projectCards.forEach(card => {
                         const cat = card.getAttribute('data-category');
-                        const show = (filter === 'all' || cat === filter);
+                        let show = false;
+
+                        if (filter === 'all') {
+                            show = true; // Show everything
+                            card.style.order = 0; // default order
+                        } else if (filter === 'javascript') {
+                            show = cat === 'javascript';
+                            card.style.order = 0; // default order
+                        } else if (filter === 'react') {
+                            show = cat === 'react';
+                            // Bring React projects to top
+                            card.style.order = show ? -1 : 0;
+                        }
+
                         card.classList.toggle('hide', !show);
                         card.setAttribute('aria-hidden', (!show).toString());
+
                         if (show) visible++;
                     });
-                    if (filterStatus) filterStatus.textContent = `${visible} projects filtered by ${filter === 'all' ? 'All' : filter}`;
+
+                    if (filterStatus) {
+                        filterStatus.textContent = `${visible} projects filtered by ${filter === 'all' ? 'All' : filter}`;
+                    }
                 });
             });
+
 
             /* ---------------------
                Contact form submit (Google Apps Script placeholder)
@@ -1304,8 +1339,23 @@
                         if (!valid) allValid = false;
                     });
 
-                    if (!allValid) {
-                        alert('⚠️ Please correct highlighted fields before submitting.');
+
+                    const nameField = contactForm.querySelector('#name');
+                    const emailField = contactForm.querySelector('#email');
+                    const messageField = contactForm.querySelector('#message');
+
+                    const emptyFields = [];
+
+                    if (!nameField.value.trim()) emptyFields.push('Name');
+                    if (!emailField.value.trim()) emptyFields.push('Email');
+                    if (!messageField.value.trim()) emptyFields.push('Message');
+
+                    if (emptyFields.length > 0) {
+                        alert('⚠️ Please fill ' + emptyFields.join(', '));
+                        // focus first empty field
+                        if (emptyFields.includes('Name')) nameField.focus();
+                        else if (emptyFields.includes('Email')) emailField.focus();
+                        else messageField.focus();
                         return;
                     }
 
