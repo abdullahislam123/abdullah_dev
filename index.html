@@ -1492,43 +1492,106 @@
         const formStatus = document.getElementById('form-status');
         const form = document.getElementById('contact-form');
         
-        // Simple form validation and mock submission
+        // Helper function for basic email validation
+        function isValidEmail(email) {
+            // Simple regex check for typical email format (checks for @ and .)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        /**
+         * Validates a single input field.
+         * Applies the 'invalid' class for visual feedback.
+         * @param {HTMLInputElement | HTMLTextAreaElement} input 
+         * @returns {boolean} True if the field is valid, false otherwise.
+         */
+        function validateField(input) {
+            let fieldValid = true;
+            const value = input.value.trim();
+
+            if (!value) {
+                // Check 1: Must not be empty
+                fieldValid = false;
+            } else if (input.id === 'email' && !isValidEmail(value)) {
+                // Check 2: If it's email, check format
+                fieldValid = false;
+            }
+
+            if (!fieldValid) {
+                input.classList.add('invalid');
+            } else {
+                input.classList.remove('invalid');
+            }
+            return fieldValid;
+        }
+
+        /**
+         * Runs validation on all required fields.
+         * @returns {boolean} True if all fields are valid.
+         */
         function validateForm() {
             let valid = true;
             const requiredFields = ['name', 'email', 'message'];
             
             requiredFields.forEach(fieldId => {
                 const input = document.getElementById(fieldId);
-                if (!input.value.trim()) {
-                    input.classList.add('invalid');
+                // The overall 'valid' flag is set to false if any individual validation fails
+                if (!validateField(input)) {
                     valid = false;
-                } else {
-                    input.classList.remove('invalid');
                 }
             });
             return valid;
         }
         
         function handleFormSubmit(event) {
-            event.preventDefault();
-            formStatus.style.display = 'none';
-            
+            event.preventDefault(); // Stop the default form submission
+            formStatus.style.display = 'none'; // Hide status before validation
+
+            // Strict validation check
             if (!validateForm()) {
-                formStatus.textContent = 'Please fill out all required fields.';
+                formStatus.textContent = 'Please correct the fields highlighted in red to proceed.';
                 formStatus.className = 'form-message error';
+                formStatus.style.display = 'block'; // Show error message
                 return;
             }
 
-            // Simulate form submission success
+            // --- Simulation of a successful form submission ---
+            
+            // Clear any invalid styling that might have been left over
+            document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+
+            // Show success message
             formStatus.textContent = 'Thank you! Your message has been sent successfully.';
             formStatus.className = 'form-message success';
-            form.reset();
+            formStatus.style.display = 'block'; 
+
+            form.reset(); // Clear form fields
             
             // Clear status after 5 seconds
             setTimeout(() => {
                 formStatus.style.display = 'none';
+                formStatus.textContent = '';
             }, 5000);
         }
+
+        // 3. Attach event listeners for strict, real-time validation feedback
+        form.addEventListener('submit', handleFormSubmit);
+
+        const requiredFields = ['name', 'email', 'message'];
+        requiredFields.forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+
+            // Validate on blur for immediate feedback after leaving a field
+            input.addEventListener('blur', () => {
+                validateField(input);
+            });
+
+            // Validate on input to remove the error state instantly when the user starts correcting
+            input.addEventListener('input', () => {
+                 validateField(input);
+            });
+        });
+    </script>
     </script>
 </body>
 
