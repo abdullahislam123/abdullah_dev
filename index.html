@@ -15,9 +15,11 @@
         ==================================================================== */
         :root {
             /* Colors - Adjusted for richer tones */
-            --primary: #5a5fef; /* Slightly refined blue-violet */
+            --primary: #5a5fef;
+            /* Slightly refined blue-violet */
             --secondary: #8b5cf6;
-            --accent: #06b6d4; /* Teal for highlights */
+            --accent: #06b6d4;
+            /* Teal for highlights */
             --dark-bg: #0d1222;
             --light-bg: #f5f7fa;
             --text-dark: #1e293b;
@@ -41,16 +43,26 @@
         body.dark-mode {
             --bg-color: var(--dark-bg);
             --text-color: var(--text-light);
-            --card-bg: #1f2937; /* Darker card for contrast */
+            --card-bg: #1f2937;
+            /* Darker card for contrast */
             --nav-bg: rgba(13, 18, 34, 0.95);
-            --text-dark: #e2e8f0; /* Ensure text color flips */
+            --text-dark: #e2e8f0;
+            /* Ensure text color flips */
         }
 
         /* Keyframe for Floating Animation */
         @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(1deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(1deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
         }
 
         * {
@@ -109,7 +121,8 @@
             content: '';
             display: block;
             width: 80px;
-            height: 4px; /* Slightly thicker */
+            height: 4px;
+            /* Slightly thicker */
             background: var(--accent);
             margin: 0.75rem auto 0;
             border-radius: 5px;
@@ -147,8 +160,10 @@
             right: 0;
             z-index: 1100;
             background: var(--nav-bg);
-            backdrop-filter: blur(10px); /* Increased blur for better separation */
-            box-shadow: 0 2px 20px rgba(0, 0, 0, .12); /* Slightly stronger shadow */
+            backdrop-filter: blur(10px);
+            /* Increased blur for better separation */
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .12);
+            /* Slightly stronger shadow */
             transition: background .3s, box-shadow .3s;
         }
 
@@ -216,7 +231,8 @@
             top: 65px;
             /* Adjust based on your nav height */
             left: 0;
-            width: 75%; /* Wider on small screens */
+            width: 75%;
+            /* Wider on small screens */
             max-width: 300px;
             height: 75vh;
             background: var(--card-bg);
@@ -224,7 +240,8 @@
             box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             transform: translateX(0);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy transition */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Springy transition */
         }
 
         .nav-links[aria-hidden="true"] {
@@ -360,6 +377,7 @@
             from {
                 transform: translate(0, 0);
             }
+
             to {
                 transform: translate(200px, 100px);
             }
@@ -370,7 +388,8 @@
             flex-direction: column;
             align-items: center;
             gap: 3rem;
-            position: relative; /* Bring content above the glow */
+            position: relative;
+            /* Bring content above the glow */
             z-index: 10;
         }
 
@@ -403,10 +422,12 @@
         }
 
         @keyframes blink-caret {
+
             from,
             to {
                 opacity: 0;
             }
+
             50% {
                 opacity: 1;
             }
@@ -430,7 +451,8 @@
             width: 320px;
             height: 320px;
             margin: 0 auto;
-            animation: float 6s ease-in-out infinite; /* Apply main float animation */
+            animation: float 6s ease-in-out infinite;
+            /* Apply main float animation */
         }
 
         .profile-img {
@@ -438,7 +460,8 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            box-shadow: 0 10px 40px rgba(90, 95, 239, 0.3); /* Primary color shadow */
+            box-shadow: 0 10px 40px rgba(90, 95, 239, 0.3);
+            /* Primary color shadow */
             border: 6px solid var(--primary);
             filter: grayscale(10%);
             transition: filter 0.3s;
@@ -479,7 +502,7 @@
             right: -70px;
             animation: float 5s ease-in-out infinite 1s;
         }
-        
+
         body.dark-mode .floating-card {
             border-color: #334155;
             box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
@@ -523,8 +546,10 @@
         .skill-card {
             background: var(--card-bg);
             padding: 1.5rem;
-            border-radius: 16px; /* More rounded corners */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            border-radius: 16px;
+            /* More rounded corners */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            /* Subtle shadow */
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
             /* Animation initial state for JS observer */
             opacity: 0;
@@ -543,7 +568,8 @@
 
         .skill-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(90, 95, 239, 0.25); /* Lifted shadow on hover */
+            box-shadow: 0 15px 30px rgba(90, 95, 239, 0.25);
+            /* Lifted shadow on hover */
         }
 
         .skill-header {
@@ -553,7 +579,7 @@
             gap: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .skill-name-container {
             display: flex;
             align-items: center;
@@ -570,7 +596,7 @@
             font-weight: 700;
             color: var(--text-color);
         }
-        
+
         .skill-percentage {
             font-size: 1rem;
             font-weight: 600;
@@ -578,7 +604,8 @@
         }
 
         .progress-bar {
-            height: 12px; /* Slightly thicker bar */
+            height: 12px;
+            /* Slightly thicker bar */
             background: #e5e7eb;
             border-radius: 6px;
             overflow: hidden;
@@ -593,7 +620,8 @@
             width: 0;
             background: var(--gradient);
             border-radius: 6px;
-            transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth, accelerating animation */
+            transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            /* Smooth, accelerating animation */
         }
 
         .skill-card.animate .progress-fill {
@@ -668,23 +696,25 @@
 
         .project-card:hover {
             transform: translateY(-10px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(90, 95, 239, 0.35); /* Dramatic lift on hover */
+            box-shadow: 0 20px 40px rgba(90, 95, 239, 0.35);
+            /* Dramatic lift on hover */
         }
 
         .project-img-container {
             overflow: hidden;
             height: 220px;
         }
-        
+
         .project-img {
             height: 100%;
             width: 100%;
             object-fit: cover;
             transition: transform 0.5s ease-out;
         }
-        
+
         .project-card:hover .project-img {
-            transform: scale(1.05); /* Image zoom on hover */
+            transform: scale(1.05);
+            /* Image zoom on hover */
         }
 
         .project-info {
@@ -738,7 +768,8 @@
         .link-code {
             font-weight: 600;
             color: var(--accent);
-            text-decoration: none; /* Removed underline by default */
+            text-decoration: none;
+            /* Removed underline by default */
             border-bottom: 2px solid transparent;
             transition: color 0.2s, border-bottom 0.2s;
         }
@@ -746,7 +777,8 @@
         .link-demo:hover,
         .link-code:hover {
             color: var(--primary);
-            border-color: var(--primary); /* Hover underline effect */
+            border-color: var(--primary);
+            /* Hover underline effect */
         }
 
         /* ====================================================================
@@ -805,7 +837,7 @@
             resize: vertical;
             min-height: 150px;
         }
-        
+
         .form-message {
             margin-top: 1rem;
             padding: 0.75rem;
@@ -871,14 +903,15 @@
             font-size: 2rem;
             color: var(--text-light);
             transition: color 0.3s, transform 0.3s;
-            line-height: 1; /* Fix alignment */
+            line-height: 1;
+            /* Fix alignment */
         }
 
         .social-links a:hover {
             color: var(--accent);
             transform: scale(1.2) rotate(5deg);
         }
-        
+
         .footer-logo {
             font-size: 1.5rem;
             font-weight: 800;
@@ -922,7 +955,7 @@
     <nav>
         <div class="container">
             <a href="#" class="logo">Abdullah</a>
-            
+
             <!-- Navigation Links -->
             <ul class="nav-links" role="menu" aria-hidden="true">
                 <li role="menuitem"><a href="#hero">Home</a></li>
@@ -936,7 +969,7 @@
                 <button class="theme-toggle" aria-label="Toggle dark mode">
                     <i data-lucide="moon" id="theme-icon"></i>
                 </button>
-                
+
                 <!-- Mobile Menu Hamburger -->
                 <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false">
                     <i data-lucide="menu"></i>
@@ -944,7 +977,7 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="mobile-backdrop" aria-hidden="true"></div>
 
     <main>
@@ -956,8 +989,9 @@
                 <div class="hero-text">
                     <h1>Hi, I'm Abdullah,</h1>
                     <span class="typing" id="typing-text"></span>
-                    <p>I build elegant and scalable full-stack applications with a focus on seamless user experience and performance. Let's create something impactful together.</p>
-                    
+                    <p>I build elegant and scalable full-stack applications with a focus on seamless user experience and
+                        performance. Let's create something impactful together.</p>
+
                     <div class="cta-buttons">
                         <a href="#projects" class="btn btn-primary">
                             View My Work <i data-lucide="arrow-right"></i>
@@ -970,7 +1004,7 @@
 
                 <div class="hero-image">
                     <img src="images/my_pic.jpg" alt="Abdullah's Professional Profile" class="profile-img">
-                    
+
                     <!-- Floating Cards -->
                     <div class="floating-card card-1">
                         <i data-lucide="code"></i> Full-Stack Dev
@@ -990,67 +1024,70 @@
                 <h2 class="section-title">Technical Expertise</h2>
 
                 <div class="skills-grid">
-    <!-- Skill Card 1: HTML, CSS & Responsiveness -->
-    <div class="skill-card" data-skill-level="95">
-        <div class="skill-header">
-            <div class="skill-name-container">
-                <i data-lucide="code" class="skill-icon"></i>
-                <span class="skill-name">HTML, CSS & Responsiveness</span>
-            </div>
-            <span class="skill-percentage">95%</span>
-        </div>
-        <p>Expert in semantic HTML5, modern CSS (Flexbox/Grid, SASS), and building fully responsive, mobile-first designs.</p>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-    </div>
+                    <!-- Skill Card 1: HTML, CSS & Responsiveness -->
+                    <div class="skill-card" data-skill-level="95">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <i data-lucide="code" class="skill-icon"></i>
+                                <span class="skill-name">HTML, CSS & Responsiveness</span>
+                            </div>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <p>Expert in semantic HTML5, modern CSS (Flexbox/Grid, SASS), and building fully responsive,
+                            mobile-first designs.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
 
-    <!-- Skill Card 2: JavaScript (ES6+) -->
-    <div class="skill-card" data-skill-level="90">
-        <div class="skill-header">
-            <div class="skill-name-container">
-                <i data-lucide="zap" class="skill-icon"></i>
-                <span class="skill-name">Modern JavaScript (ES6+)</span>
-            </div>
-            <span class="skill-percentage">90%</span>
-        </div>
-        <p>Proficient in asynchronous programming, advanced functions, complex DOM manipulation, and object-oriented JS.</p>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-    </div>
+                    <!-- Skill Card 2: JavaScript (ES6+) -->
+                    <div class="skill-card" data-skill-level="90">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <i data-lucide="zap" class="skill-icon"></i>
+                                <span class="skill-name">Modern JavaScript (ES6+)</span>
+                            </div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <p>Proficient in asynchronous programming, advanced functions, complex DOM manipulation, and
+                            object-oriented JS.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
 
-    <!-- Skill Card 3: React.js Expertise -->
-    <div class="skill-card" data-skill-level="88">
-        <div class="skill-header">
-            <div class="skill-name-container">
-                <i data-lucide="atom" class="skill-icon"></i>
-                <span class="skill-name">React.js & State Management</span>
-            </div>
-            <span class="skill-percentage">88%</span>
-        </div>
-        <p>Strong experience building complex user interfaces using functional components, Hooks, and integrating global state solutions (e.g., Redux, Zustand).</p>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-    </div>
+                    <!-- Skill Card 3: React.js Expertise -->
+                    <div class="skill-card" data-skill-level="88">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <i data-lucide="atom" class="skill-icon"></i>
+                                <span class="skill-name">React.js & State Management</span>
+                            </div>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <p>Strong experience building complex user interfaces using functional components, Hooks, and
+                            integrating global state solutions (e.g., Redux, Zustand).</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
 
-    <!-- Skill Card 4: Version Control (Git/GitHub) -->
-    <div class="skill-card" data-skill-level="80">
-        <div class="skill-header">
-            <div class="skill-name-container">
-                <i data-lucide="git-branch" class="skill-icon"></i>
-                <span class="skill-name">Version Control (Git/GitHub)</span>
-            </div>
-            <span class="skill-percentage">80%</span>
-        </div>
-        <p>Daily use of Git for collaborative development, branching, merging, conflict resolution, and project management via GitHub.</p>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-    </div>
-</div>
-
+                    <!-- Skill Card 4: Version Control (Git/GitHub) -->
+                    <div class="skill-card" data-skill-level="80">
+                        <div class="skill-header">
+                            <div class="skill-name-container">
+                                <i data-lucide="git-branch" class="skill-icon"></i>
+                                <span class="skill-name">Version Control (Git/GitHub)</span>
+                            </div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <p>Daily use of Git for collaborative development, branching, merging, conflict resolution, and
+                            project management via GitHub.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1060,7 +1097,7 @@
         <section id="projects">
             <div class="container">
                 <h2 class="section-title">Featured Projects</h2>
-                
+
                 <!-- Project Filters -->
                 <div class="project-filters">
                     <button class="filter-btn active" data-filter="all">All</button>
@@ -1071,23 +1108,27 @@
 
                 <!-- Projects Grid -->
                 <div class="projects-grid" id="projects-grid">
-                    
+
                     <!-- Project Card 1: Twitter Clone -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/8b5cf6/ffffff?text=Twitter+Clone" alt="Twitter Clone Interface" class="project-img">
+                            <img src="https://placehold.co/400x220/8b5cf6/ffffff?text=Twitter+Clone"
+                                alt="Twitter Clone Interface" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Twitter (X) Clone</h3>
-                            <p class="project-desc">A responsive front-end replication of the modern Twitter interface, highlighting skills in CSS layout and design fidelity.</p>
+                            <p class="project-desc">A responsive front-end replication of the modern Twitter interface,
+                                highlighting skills in CSS layout and design fidelity.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
                                 <span class="tech-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/twitter-clone/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/twitter-clone" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/twitter-clone/" class="link-demo"
+                                    target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/twitter-clone" class="link-code"
+                                    target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
@@ -1095,11 +1136,13 @@
                     <!-- Project Card 2: Daily Expense Tracker -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/06b6d4/ffffff?text=Expense+Tracker" alt="Daily Expense Tracker" class="project-img">
+                            <img src="https://placehold.co/400x220/06b6d4/ffffff?text=Expense+Tracker"
+                                alt="Daily Expense Tracker" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Daily Expense Tracker</h3>
-                            <p class="project-desc">A utility application for recording and managing personal daily expenditures, demonstrating practical form handling and local storage usage.</p>
+                            <p class="project-desc">A utility application for recording and managing personal daily
+                                expenditures, demonstrating practical form handling and local storage usage.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
@@ -1107,8 +1150,10 @@
                                 <span class="tech-tag">Local Storage</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/expense-tracker/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/smart-expense-manager" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/expense-tracker/" class="link-demo"
+                                    target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/smart-expense-manager" class="link-code"
+                                    target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
@@ -1116,102 +1161,122 @@
                     <!-- Project Card 3: Calculator -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/5a5fef/ffffff?text=Calculator+App" alt="Web Calculator Application" class="project-img">
+                            <img src="https://placehold.co/400x220/5a5fef/ffffff?text=Calculator+App"
+                                alt="Web Calculator Application" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Web Calculator</h3>
-                            <p class="project-desc">A fully functional, responsive calculator application that handles basic and multi-step arithmetic operations efficiently.</p>
+                            <p class="project-desc">A fully functional, responsive calculator application that handles
+                                basic and multi-step arithmetic operations efficiently.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
                                 <span class="tech-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/calculator/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/calculator" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/calculator/" class="link-demo"
+                                    target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/calculator" class="link-code"
+                                    target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Project Card 4: Unit Converter -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/8b5cf6/ffffff?text=Unit+Converter" alt="Unit and Temperature Converter" class="project-img">
+                            <img src="https://placehold.co/400x220/8b5cf6/ffffff?text=Unit+Converter"
+                                alt="Unit and Temperature Converter" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Unit and Temp Converter</h3>
-                            <p class="project-desc">A utility tool for converting various units of distance and temperature, focusing on accurate mathematical logic and instant display.</p>
+                            <p class="project-desc">A utility tool for converting various units of distance and
+                                temperature, focusing on accurate mathematical logic and instant display.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
                                 <span class="tech-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/temperature-and-distance-converter/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/temperature-and-distance-converter" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/temperature-and-distance-converter/"
+                                    class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/temperature-and-distance-converter"
+                                    class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Project Card 5: Stopwatch -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/06b6d4/ffffff?text=Stopwatch+App" alt="Digital Stopwatch Application" class="project-img">
+                            <img src="https://placehold.co/400x220/06b6d4/ffffff?text=Stopwatch+App"
+                                alt="Digital Stopwatch Application" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Digital Stopwatch</h3>
-                            <p class="project-desc">A classic digital stopwatch with start, pause, reset, and lap functionalities, showcasing timing and state management in JavaScript.</p>
+                            <p class="project-desc">A classic digital stopwatch with start, pause, reset, and lap
+                                functionalities, showcasing timing and state management in JavaScript.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
                                 <span class="tech-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/Stopwatch/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/Stopwatch" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/Stopwatch/" class="link-demo"
+                                    target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/Stopwatch" class="link-code"
+                                    target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Project Card 6: Rock Paper Scissors Game -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/5a5fef/ffffff?text=RPS+Game" alt="Rock Paper Scissors Game" class="project-img">
+                            <img src="https://placehold.co/400x220/5a5fef/ffffff?text=RPS+Game"
+                                alt="Rock Paper Scissors Game" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Rock Paper Scissors Game</h3>
-                            <p class="project-desc">An interactive game against an AI opponent, built to demonstrate clear game logic, user interaction handling, and scorekeeping.</p>
+                            <p class="project-desc">An interactive game against an AI opponent, built to demonstrate
+                                clear game logic, user interaction handling, and scorekeeping.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
                                 <span class="tech-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/rock-papaer-scissor/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/rock-papaer-scissor" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/rock-papaer-scissor/" class="link-demo"
+                                    target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/rock-papaer-scissor" class="link-code"
+                                    target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Project Card 7: Previous Portfolio -->
                     <div class="project-card" data-category="frontend">
                         <div class="project-img-container">
-                            <img src="https://placehold.co/400x220/8b5cf6/ffffff?text=Dev+Portfolio" alt="Previous Developer Portfolio" class="project-img">
+                            <img src="https://placehold.co/400x220/8b5cf6/ffffff?text=Dev+Portfolio"
+                                alt="Previous Developer Portfolio" class="project-img">
                         </div>
                         <div class="project-info">
                             <h3 class="project-title">Previous Portfolio</h3>
-                            <p class="project-desc">The preceding version of my personal portfolio website, demonstrating foundational design and front-end development capabilities.</p>
+                            <p class="project-desc">The preceding version of my personal portfolio website,
+                                demonstrating foundational design and front-end development capabilities.</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">HTML</span>
                                 <span class="tech-tag">CSS</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://abdullahislam123.github.io/abdullah_dev/" class="link-demo" target="_blank">Live Demo <i data-lucide="external-link"></i></a>
-                                <a href="https://github.com/abdullahislam123/abdullah_dev" class="link-code" target="_blank">View Code <i data-lucide="github"></i></a>
+                                <a href="https://abdullahislam123.github.io/abdullah_dev/" class="link-demo"
+                                    target="_blank">Live Demo <i data-lucide="external-link"></i></a>
+                                <a href="https://github.com/abdullahislam123/abdullah_dev" class="link-code"
+                                    target="_blank">View Code <i data-lucide="github"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
@@ -1222,10 +1287,11 @@
         <section id="contact">
             <div class="container contact-container">
                 <h2 class="section-title">Let's Connect</h2>
-                
+
                 <form class="contact-form" id="contact-form" onsubmit="handleFormSubmit(event)">
-                    <p style="text-align: center; margin-bottom: 2rem;">I'm actively seeking new challenges and collaborations. Drop me a line!</p>
-                    
+                    <p style="text-align: center; margin-bottom: 2rem;">I'm actively seeking new challenges and
+                        collaborations. Drop me a line!</p>
+
                     <div class="form-group">
                         <label for="name">Your Name<span class="must">*</span></label>
                         <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -1243,13 +1309,14 @@
 
                     <div class="form-group">
                         <label for="message">Message<span class="must">*</span></label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Tell me about your idea or opportunity..."></textarea>
+                        <textarea id="message" name="message" rows="5" required
+                            placeholder="Tell me about your idea or opportunity..."></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
                         Send Message <i data-lucide="send"></i>
                     </button>
-                    
+
                     <!-- Submission Status Message -->
                     <div class="form-message" id="form-status" role="alert" aria-live="polite"></div>
                 </form>
@@ -1266,13 +1333,14 @@
             <div class="footer-cta">
                 <h3>Ready to start your project?</h3>
                 <p>Don't hesitate to reach out for consultations or project proposals.</p>
-                <a href="#contact" class="btn btn-outline-primary" style="color: var(--light-bg); border-color: var(--light-bg); margin-top: 1rem;">
+                <a href="#contact" class="btn btn-outline-primary"
+                    style="color: var(--light-bg); border-color: var(--light-bg); margin-top: 1rem;">
                     Discuss Your Idea <i data-lucide="message-square"></i>
                 </a>
             </div>
 
             <span class="footer-logo">Abdullah.</span>
-            
+
             <div class="social-links">
                 <a href="#" aria-label="LinkedIn Profile" target="_blank"><i data-lucide="linkedin"></i></a>
                 <a href="#" aria-label="GitHub Profile" target="_blank"><i data-lucide="github"></i></a>
@@ -1420,14 +1488,14 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const target = entry.target;
-                        
+
                         // 5a. Handle Skill Card Animation (Progress Bar)
                         if (target.classList.contains('skill-card')) {
                             const level = target.getAttribute('data-skill-level');
                             target.style.setProperty('--progress', `${level}%`);
                             target.classList.add('animate');
                         }
-                        
+
                         // 5b. Handle General Fade-In Animation (Project and Skill Cards)
                         target.classList.add('animate-in');
 
@@ -1441,7 +1509,7 @@
             document.querySelectorAll('.skill-card').forEach(card => {
                 observer.observe(card);
             });
-            
+
             // Observe all project cards (for fade-in)
             document.querySelectorAll('.project-card').forEach(card => {
                 observer.observe(card);
@@ -1469,19 +1537,19 @@
                 projectCards.forEach(card => {
                     const category = card.getAttribute('data-category');
                     const isVisible = filter === 'all' || category === filter;
-                    
+
                     if (isVisible) {
                         // Use a short timeout to allow the hide transition to finish before showing
                         setTimeout(() => {
                             card.classList.remove('hide');
                             card.style.display = 'block';
-                        }, 50); 
+                        }, 50);
                     } else {
                         card.classList.add('hide');
                         // Use a timeout to hide display after transition is done
                         setTimeout(() => {
-                             card.style.display = 'none';
-                        }, 400); 
+                            card.style.display = 'none';
+                        }, 400);
                     }
                 });
             });
@@ -1490,9 +1558,7 @@
         // =============================================
         // 7. CONTACT FORM LOGIC (Placeholder Submission)
         // =============================================
-        const formStatus = document.getElementById('form-status');
-        const form = document.getElementById('contact-form');
-        
+
         // Helper function for basic email validation
         function isValidEmail(email) {
             // Simple regex check for typical email format (checks for @ and .)
@@ -1533,7 +1599,7 @@
         function validateForm() {
             let valid = true;
             const requiredFields = ['name', 'email', 'message'];
-            
+
             requiredFields.forEach(fieldId => {
                 const input = document.getElementById(fieldId);
                 // The overall 'valid' flag is set to false if any individual validation fails
@@ -1543,55 +1609,117 @@
             });
             return valid;
         }
-        
-        function handleFormSubmit(event) {
-            event.preventDefault(); // Stop the default form submission
-            formStatus.style.display = 'none'; // Hide status before validation
 
-            // Strict validation check
-            if (!validateForm()) {
-                formStatus.textContent = 'Please correct the fields highlighted in red to proceed.';
-                formStatus.className = 'form-message error';
-                formStatus.style.display = 'block'; // Show error message
-                return;
+        const formStatus = document.getElementById('form-status');
+const form = document.getElementById('contact-form');
+
+// ✅ Replace with your Google Apps Script URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec";
+
+// Helper function for basic email validation
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+/**
+ * Validates a single input field.
+ * Applies the 'invalid' class for visual feedback.
+ */
+function validateField(input) {
+    let fieldValid = true;
+    const value = input.value.trim();
+
+    if (!value) {
+        fieldValid = false;
+    } else if (input.id === 'email' && !isValidEmail(value)) {
+        fieldValid = false;
+    }
+
+    if (!fieldValid) {
+        input.classList.add('invalid');
+    } else {
+        input.classList.remove('invalid');
+    }
+    return fieldValid;
+}
+
+/**
+ * Runs validation on all required fields.
+ */
+function validateForm() {
+    let valid = true;
+    const requiredFields = ['name', 'email', 'message'];
+
+    requiredFields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (!validateField(input)) valid = false;
+    });
+    return valid;
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    formStatus.style.display = 'none';
+
+    // 🔒 Step 1: Validate before sending
+    if (!validateForm()) {
+        formStatus.textContent = '⚠️ Please correct the fields highlighted in red to proceed.';
+        formStatus.className = 'form-message error';
+        formStatus.style.display = 'block';
+        return;
+    }
+
+    // 🔄 Step 2: Send data to Google Sheets via fetch
+    formStatus.textContent = '⏳ Sending your message...';
+    formStatus.className = 'form-message pending';
+    formStatus.style.display = 'block';
+
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: new FormData(form),
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.result === 'success') {
+                // ✅ Success Message
+                formStatus.textContent = '✅ Thank you! Your message has been sent successfully.';
+                formStatus.className = 'form-message success';
+                form.reset();
+
+                // Remove 'invalid' classes if any remain
+                document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                    formStatus.textContent = '';
+                }, 5000);
+            } else {
+                throw new Error('Server Error');
             }
-
-            // --- Simulation of a successful form submission ---
-            
-            // Clear any invalid styling that might have been left over
-            document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
-
-            // Show success message
-            formStatus.textContent = 'Thank you! Your message has been sent successfully.';
-            formStatus.className = 'form-message success';
-            formStatus.style.display = 'block'; 
-
-            form.reset(); // Clear form fields
-            
-            // Clear status after 5 seconds
-            setTimeout(() => {
-                formStatus.style.display = 'none';
-                formStatus.textContent = '';
-            }, 5000);
-        }
-
-        // 3. Attach event listeners for strict, real-time validation feedback
-        form.addEventListener('submit', handleFormSubmit);
-
-        const requiredFields = ['name', 'email', 'message'];
-        requiredFields.forEach(fieldId => {
-            const input = document.getElementById(fieldId);
-
-            // Validate on blur for immediate feedback after leaving a field
-            input.addEventListener('blur', () => {
-                validateField(input);
-            });
-
-            // Validate on input to remove the error state instantly when the user starts correcting
-            input.addEventListener('input', () => {
-                 validateField(input);
-            });
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            formStatus.textContent = '❌ Something went wrong. Please try again later.';
+            formStatus.className = 'form-message error';
         });
+}
+
+// 3️⃣ Attach event listeners for validation and submission
+form.addEventListener('submit', handleFormSubmit);
+
+const requiredFields = ['name', 'email', 'message'];
+requiredFields.forEach(fieldId => {
+    const input = document.getElementById(fieldId);
+
+    // Validate on blur
+    input.addEventListener('blur', () => validateField(input));
+
+    // Validate on input (real-time)
+    input.addEventListener('input', () => validateField(input));
+});
+
     </script>
     </script>
 </body>
