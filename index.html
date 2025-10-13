@@ -1355,8 +1355,6 @@
     <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
         <i data-lucide="chevron-up"></i>
     </button>
-
-
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
@@ -1385,16 +1383,16 @@
 
             if (!isDeleting && charIndex === currentPhrase.length) {
                 isDeleting = true;
-                setTimeout(type, 1500); // Pause at end of sentence
+                setTimeout(type, 1500);
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
-                setTimeout(type, 500); // Pause before starting next sentence
+                setTimeout(type, 500);
             } else {
                 setTimeout(type, delay);
             }
         }
-        type(); // Start the typing animation
+        type();
 
         // =============================================
         // 2. THEME TOGGLE LOGIC (DARK MODE)
@@ -1404,12 +1402,8 @@
         const themeIcon = document.getElementById('theme-icon');
 
         function updateThemeIcon() {
-            if (body.classList.contains('dark-mode')) {
-                themeIcon.setAttribute('data-lucide', 'sun');
-            } else {
-                themeIcon.setAttribute('data-lucide', 'moon');
-            }
-            lucide.createIcons(); // Re-render icon
+            themeIcon.setAttribute('data-lucide', body.classList.contains('dark-mode') ? 'sun' : 'moon');
+            lucide.createIcons();
         }
 
         themeToggle.addEventListener('click', () => {
@@ -1418,9 +1412,7 @@
             updateThemeIcon();
         });
 
-        // Load saved theme from localStorage
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
+        if (localStorage.getItem('theme') === 'dark') {
             body.classList.add('dark-mode');
         }
         updateThemeIcon();
@@ -1444,13 +1436,9 @@
         hamburger.addEventListener('click', toggleMobileMenu);
         backdrop.addEventListener('click', toggleMobileMenu);
 
-        // Close menu when a link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                // Only close if in mobile view (navLinks.classList.contains('active'))
-                if (navLinks.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
+                if (navLinks.classList.contains('active')) toggleMobileMenu();
             });
         });
 
@@ -1458,64 +1446,37 @@
         // 4. SCROLL TO TOP LOGIC
         // =============================================
         const scrollTopButton = document.getElementById('scroll-top');
-
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollTopButton.classList.add('show');
-            } else {
-                scrollTopButton.classList.remove('show');
-            }
+            scrollTopButton.classList.toggle('show', window.scrollY > 300);
         });
 
         scrollTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // =============================================
-        // 5. INTERSECTION OBSERVER FOR ANIMATION (AOS REPLACEMENT)
+        // 5. INTERSECTION OBSERVER FOR ANIMATION
         // =============================================
         const animateOnScroll = () => {
-            const options = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2 // Trigger when 20% of element is visible
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const target = entry.target;
 
-                        // 5a. Handle Skill Card Animation (Progress Bar)
                         if (target.classList.contains('skill-card')) {
                             const level = target.getAttribute('data-skill-level');
                             target.style.setProperty('--progress', `${level}%`);
                             target.classList.add('animate');
                         }
 
-                        // 5b. Handle General Fade-In Animation (Project and Skill Cards)
                         target.classList.add('animate-in');
-
-                        // Stop observing once animated
-                        observer.unobserve(target);
+                        obs.unobserve(target);
                     }
                 });
-            }, options);
+            }, { threshold: 0.2 });
 
-            // Observe all skill cards (for both progress bar and fade-in)
-            document.querySelectorAll('.skill-card').forEach(card => {
-                observer.observe(card);
-            });
-
-            // Observe all project cards (for fade-in)
-            document.querySelectorAll('.project-card').forEach(card => {
-                observer.observe(card);
-            });
+            document.querySelectorAll('.skill-card, .project-card').forEach(el => observer.observe(el));
         };
-
         animateOnScroll();
 
         // =============================================
@@ -1523,30 +1484,22 @@
         // =============================================
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
-        const projectsGrid = document.getElementById('projects-grid');
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Update active state
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
 
                 const filter = button.getAttribute('data-filter');
-
-                // Apply filtering and animation
                 projectCards.forEach(card => {
-                    const category = card.getAttribute('data-category');
-                    const isVisible = filter === 'all' || category === filter;
-
-                    if (isVisible) {
-                        // Use a short timeout to allow the hide transition to finish before showing
+                    const show = filter === 'all' || card.getAttribute('data-category') === filter;
+                    if (show) {
                         setTimeout(() => {
                             card.classList.remove('hide');
                             card.style.display = 'block';
                         }, 50);
                     } else {
                         card.classList.add('hide');
-                        // Use a timeout to hide display after transition is done
                         setTimeout(() => {
                             card.style.display = 'none';
                         }, 400);
@@ -1556,121 +1509,42 @@
         });
 
         // =============================================
-        // 7. CONTACT FORM LOGIC (Placeholder Submission)
+        // 7. CONTACT FORM LOGIC (Google Sheets Integration)
         // =============================================
-
-        // Helper function for basic email validation
-        function isValidEmail(email) {
-            // Simple regex check for typical email format (checks for @ and .)
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        /**
-         * Validates a single input field.
-         * Applies the 'invalid' class for visual feedback.
-         * @param {HTMLInputElement | HTMLTextAreaElement} input 
-         * @returns {boolean} True if the field is valid, false otherwise.
-         */
-        function validateField(input) {
-            let fieldValid = true;
-            const value = input.value.trim();
-
-            if (!value) {
-                // Check 1: Must not be empty
-                fieldValid = false;
-            } else if (input.id === 'email' && !isValidEmail(value)) {
-                // Check 2: If it's email, check format
-                fieldValid = false;
-            }
-
-            if (!fieldValid) {
-                input.classList.add('invalid');
-            } else {
-                input.classList.remove('invalid');
-            }
-            return fieldValid;
-        }
-
-        /**
-         * Runs validation on all required fields.
-         * @returns {boolean} True if all fields are valid.
-         */
-        function validateForm() {
-            let valid = true;
-            const requiredFields = ['name', 'email', 'message'];
-
-            requiredFields.forEach(fieldId => {
-                const input = document.getElementById(fieldId);
-                // The overall 'valid' flag is set to false if any individual validation fails
-                if (!validateField(input)) {
-                    valid = false;
-                }
-            });
-            return valid;
-        }
-
-        const formStatus = document.getElementById('form-status');
         const form = document.getElementById('contact-form');
-
-        // ✅ Replace with your Google Apps Script URL
+        const formStatus = document.getElementById('form-status');
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec";
 
-        // Helper function for basic email validation
+        // ✅ Email validation
         function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
 
-        /**
-         * Validates a single input field.
-         * Applies the 'invalid' class for visual feedback.
-         */
+        // ✅ Field validation
         function validateField(input) {
-            let fieldValid = true;
             const value = input.value.trim();
-
-            if (!value) {
-                fieldValid = false;
-            } else if (input.id === 'email' && !isValidEmail(value)) {
-                fieldValid = false;
-            }
-
-            if (!fieldValid) {
-                input.classList.add('invalid');
-            } else {
-                input.classList.remove('invalid');
-            }
-            return fieldValid;
-        }
-
-        /**
-         * Runs validation on all required fields.
-         */
-        function validateForm() {
-            let valid = true;
-            const requiredFields = ['name', 'email', 'message'];
-
-            requiredFields.forEach(fieldId => {
-                const input = document.getElementById(fieldId);
-                if (!validateField(input)) valid = false;
-            });
+            let valid = !!value && (input.id !== 'email' || isValidEmail(value));
+            input.classList.toggle('invalid', !valid);
             return valid;
         }
 
+        // ✅ Form validation
+        function validateForm() {
+            return ['name', 'email', 'message'].every(id => validateField(document.getElementById(id)));
+        }
+
+        // ✅ Form submission
         function handleFormSubmit(event) {
             event.preventDefault();
             formStatus.style.display = 'none';
 
-            // 🔒 Step 1: Validate before sending
             if (!validateForm()) {
-                formStatus.textContent = '⚠️ Please correct the fields highlighted in red to proceed.';
+                formStatus.textContent = '⚠️ Please correct the highlighted fields.';
                 formStatus.className = 'form-message error';
                 formStatus.style.display = 'block';
                 return;
             }
 
-            // 🔄 Step 2: Send data to Google Sheets via fetch
             formStatus.textContent = '⏳ Sending your message...';
             formStatus.className = 'form-message pending';
             formStatus.style.display = 'block';
@@ -1682,45 +1556,34 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.result === 'success') {
-                        // ✅ Success Message
-                        formStatus.textContent = '✅ Thank you! Your message has been sent successfully.';
+                        formStatus.textContent = '✅ Thank you! Your message has been sent.';
                         formStatus.className = 'form-message success';
                         form.reset();
-
-                        // Remove 'invalid' classes if any remain
                         document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
-
-                        // Hide message after 5 seconds
-                        setTimeout(() => {
-                            formStatus.style.display = 'none';
-                            formStatus.textContent = '';
-                        }, 5000);
-                    } else {
-                        throw new Error('Server Error');
-                    }
+                        setTimeout(() => (formStatus.style.display = 'none'), 5000);
+                    } else throw new Error('Server Error');
                 })
                 .catch(err => {
                     console.error('Error:', err);
-                    formStatus.textContent = '❌ Something went wrong. Please try again later.';
+                    formStatus.textContent = '❌ Something went wrong. Please try again.';
                     formStatus.className = 'form-message error';
                 });
         }
 
-        // 3️⃣ Attach event listeners for validation and submission
-        form.addEventListener('submit', handleFormSubmit);
+        // ✅ Attach listeners safely (only once)
+        if (form && !form.dataset.listenerAdded) {
+            form.addEventListener('submit', handleFormSubmit);
+            form.dataset.listenerAdded = 'true';
+        }
 
-        const requiredFields = ['name', 'email', 'message'];
-        requiredFields.forEach(fieldId => {
-            const input = document.getElementById(fieldId);
-
-            // Validate on blur
-            input.addEventListener('blur', () => validateField(input));
-
-            // Validate on input (real-time)
-            input.addEventListener('input', () => validateField(input));
+        ['name', 'email', 'message'].forEach(id => {
+            const input = document.getElementById(id);
+            input?.addEventListener('blur', () => validateField(input));
+            input?.addEventListener('input', () => validateField(input));
         });
-
     </script>
+
+
 </body>
 
 </html>
