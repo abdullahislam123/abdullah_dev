@@ -1611,116 +1611,115 @@
         }
 
         const formStatus = document.getElementById('form-status');
-const form = document.getElementById('contact-form');
+        const form = document.getElementById('contact-form');
 
-// ✅ Replace with your Google Apps Script URL
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec";
+        // ✅ Replace with your Google Apps Script URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec";
 
-// Helper function for basic email validation
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
+        // Helper function for basic email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
-/**
- * Validates a single input field.
- * Applies the 'invalid' class for visual feedback.
- */
-function validateField(input) {
-    let fieldValid = true;
-    const value = input.value.trim();
+        /**
+         * Validates a single input field.
+         * Applies the 'invalid' class for visual feedback.
+         */
+        function validateField(input) {
+            let fieldValid = true;
+            const value = input.value.trim();
 
-    if (!value) {
-        fieldValid = false;
-    } else if (input.id === 'email' && !isValidEmail(value)) {
-        fieldValid = false;
-    }
-
-    if (!fieldValid) {
-        input.classList.add('invalid');
-    } else {
-        input.classList.remove('invalid');
-    }
-    return fieldValid;
-}
-
-/**
- * Runs validation on all required fields.
- */
-function validateForm() {
-    let valid = true;
-    const requiredFields = ['name', 'email', 'message'];
-
-    requiredFields.forEach(fieldId => {
-        const input = document.getElementById(fieldId);
-        if (!validateField(input)) valid = false;
-    });
-    return valid;
-}
-
-function handleFormSubmit(event) {
-    event.preventDefault();
-    formStatus.style.display = 'none';
-
-    // 🔒 Step 1: Validate before sending
-    if (!validateForm()) {
-        formStatus.textContent = '⚠️ Please correct the fields highlighted in red to proceed.';
-        formStatus.className = 'form-message error';
-        formStatus.style.display = 'block';
-        return;
-    }
-
-    // 🔄 Step 2: Send data to Google Sheets via fetch
-    formStatus.textContent = '⏳ Sending your message...';
-    formStatus.className = 'form-message pending';
-    formStatus.style.display = 'block';
-
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: new FormData(form),
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.result === 'success') {
-                // ✅ Success Message
-                formStatus.textContent = '✅ Thank you! Your message has been sent successfully.';
-                formStatus.className = 'form-message success';
-                form.reset();
-
-                // Remove 'invalid' classes if any remain
-                document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
-
-                // Hide message after 5 seconds
-                setTimeout(() => {
-                    formStatus.style.display = 'none';
-                    formStatus.textContent = '';
-                }, 5000);
-            } else {
-                throw new Error('Server Error');
+            if (!value) {
+                fieldValid = false;
+            } else if (input.id === 'email' && !isValidEmail(value)) {
+                fieldValid = false;
             }
-        })
-        .catch(err => {
-            console.error('Error:', err);
-            formStatus.textContent = '❌ Something went wrong. Please try again later.';
-            formStatus.className = 'form-message error';
+
+            if (!fieldValid) {
+                input.classList.add('invalid');
+            } else {
+                input.classList.remove('invalid');
+            }
+            return fieldValid;
+        }
+
+        /**
+         * Runs validation on all required fields.
+         */
+        function validateForm() {
+            let valid = true;
+            const requiredFields = ['name', 'email', 'message'];
+
+            requiredFields.forEach(fieldId => {
+                const input = document.getElementById(fieldId);
+                if (!validateField(input)) valid = false;
+            });
+            return valid;
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            formStatus.style.display = 'none';
+
+            // 🔒 Step 1: Validate before sending
+            if (!validateForm()) {
+                formStatus.textContent = '⚠️ Please correct the fields highlighted in red to proceed.';
+                formStatus.className = 'form-message error';
+                formStatus.style.display = 'block';
+                return;
+            }
+
+            // 🔄 Step 2: Send data to Google Sheets via fetch
+            formStatus.textContent = '⏳ Sending your message...';
+            formStatus.className = 'form-message pending';
+            formStatus.style.display = 'block';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: new FormData(form),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        // ✅ Success Message
+                        formStatus.textContent = '✅ Thank you! Your message has been sent successfully.';
+                        formStatus.className = 'form-message success';
+                        form.reset();
+
+                        // Remove 'invalid' classes if any remain
+                        document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+
+                        // Hide message after 5 seconds
+                        setTimeout(() => {
+                            formStatus.style.display = 'none';
+                            formStatus.textContent = '';
+                        }, 5000);
+                    } else {
+                        throw new Error('Server Error');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    formStatus.textContent = '❌ Something went wrong. Please try again later.';
+                    formStatus.className = 'form-message error';
+                });
+        }
+
+        // 3️⃣ Attach event listeners for validation and submission
+        form.addEventListener('submit', handleFormSubmit);
+
+        const requiredFields = ['name', 'email', 'message'];
+        requiredFields.forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+
+            // Validate on blur
+            input.addEventListener('blur', () => validateField(input));
+
+            // Validate on input (real-time)
+            input.addEventListener('input', () => validateField(input));
         });
-}
 
-// 3️⃣ Attach event listeners for validation and submission
-form.addEventListener('submit', handleFormSubmit);
-
-const requiredFields = ['name', 'email', 'message'];
-requiredFields.forEach(fieldId => {
-    const input = document.getElementById(fieldId);
-
-    // Validate on blur
-    input.addEventListener('blur', () => validateField(input));
-
-    // Validate on input (real-time)
-    input.addEventListener('input', () => validateField(input));
-});
-
-    </script>
     </script>
 </body>
 
