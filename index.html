@@ -1530,9 +1530,9 @@
             return ['name', 'email', 'message'].every(id => validateField(document.getElementById(id)));
         }
 
-        // ✅ Form submission
-        event.preventDefault();
-        formStatus.style.display = 'none';
+        // // ✅ Form submission
+        // event.preventDefault();
+        // formStatus.style.display = 'none';
 
         if (!validateForm()) {
             formStatus.textContent = '⚠️ Please correct the highlighted fields.';
