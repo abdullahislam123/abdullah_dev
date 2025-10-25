@@ -1337,9 +1337,12 @@
             <span class="footer-logo">Abdullah.</span>
 
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/abdullah-islam-81730b2a1/" aria-label="LinkedIn" target="_blank"><i data-lucide="linkedin"></i></a>
-                <a href="https://github.com/abdullahislam123" aria-label="GitHub Profile" target="_blank"><i data-lucide="github"></i></a>
-                <a href="https://www.instagram.com/script.vibe1/" aria-label="Isntagram Profile" target="_blank"><i data-lucide="instagram"></i></a>
+                <a href="https://www.linkedin.com/in/abdullah-islam-81730b2a1/" aria-label="LinkedIn" target="_blank"><i
+                        data-lucide="linkedin"></i></a>
+                <a href="https://github.com/abdullahislam123" aria-label="GitHub Profile" target="_blank"><i
+                        data-lucide="github"></i></a>
+                <a href="https://www.instagram.com/script.vibe1/" aria-label="Isntagram Profile" target="_blank"><i
+                        data-lucide="instagram"></i></a>
             </div>
 
             <p style="margin-top: 2rem; font-size: 0.9rem;">&copy; 2024 Abdullah. All rights reserved.</p>
@@ -1528,6 +1531,40 @@
         }
 
         // ✅ Form submission
+        fu
+        event.preventDefault();
+        formStatus.style.display = 'none';
+
+        if (!validateForm()) {
+            formStatus.textContent = '⚠️ Please correct the highlighted fields.';
+            formStatus.className = 'form-message error';
+            formStatus.style.display = 'block';
+            return;
+        }
+
+        formStatus.textContent = '⏳ Sending your message...';
+        formStatus.className = 'form-message pending';
+        formStatus.style.display = 'block';
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: new FormData(form),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    formStatus.textContent = '✅ Thank you! Your message has been sent.';
+                    formStatus.className = 'form-message success';
+                    form.reset();
+                    document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+                    setTimeout(() => (formStatus.style.display = 'none'), 5000);
+                } else throw new Error('Server Error');
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                formStatus.textContent = '❌ Something went wrong. Please try again.';
+                formStatus.className = 'form-message error';
+            });
         function handleFormSubmit(event) {
             event.preventDefault();
             formStatus.style.display = 'none';
@@ -1543,27 +1580,53 @@
             formStatus.className = 'form-message pending';
             formStatus.style.display = 'block';
 
+            // Get button to disable during submission
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+
             fetch(SCRIPT_URL, {
                 method: 'POST',
+                // Use FormData which correctly prepares the data for Google Apps Script
                 body: new FormData(form),
             })
-                .then(res => res.json())
+                .then(res => {
+                    // --- FIX 1: Check HTTP Status ---
+                    if (!res.ok) {
+                        // If status is 4xx or 5xx, throw specific error for the catch block
+                        throw new Error(`Server Issue: ${res.status} ${res.statusText}`);
+                    }
+                    // If OK, proceed to parse the custom JSON response
+                    return res.json();
+                })
                 .then(data => {
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                    // Check the custom JSON result expected from your Code.gs script
                     if (data.result === 'success') {
                         formStatus.textContent = '✅ Thank you! Your message has been sent.';
                         formStatus.className = 'form-message success';
                         form.reset();
                         document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+                        // Hide success message after 5 seconds
                         setTimeout(() => (formStatus.style.display = 'none'), 5000);
-                    } else throw new Error('Server Error');
+                    } else {
+                        // --- FIX 2: Use specific error message from the server ---
+                        throw new Error(data.message || 'Server returned an unknown error status.');
+                    }
                 })
                 .catch(err => {
-                    console.error('Error:', err);
-                    formStatus.textContent = '❌ Something went wrong. Please try again.';
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    console.error('Submission Error:', err);
+
+                    // Display the specific error message
+                    formStatus.textContent = `❌ Submission Failed: ${err.message || 'Please check the browser console for details.'}`;
                     formStatus.className = 'form-message error';
                 });
         }
-
         // ✅ Attach listeners safely (only once)
         if (form && !form.dataset.listenerAdded) {
             form.addEventListener('submit', handleFormSubmit);
