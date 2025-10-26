@@ -4,188 +4,476 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Abdullah — Portfolio</title>
+
+<!-- Inter font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<!-- Lucide icons -->
 <script src="https://unpkg.com/lucide/dist/lucide.min.js"></script>
+<!-- Devicon (language icons) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
 <style>
-:root {
- --accent-1:#06b6d4;--accent-2:#f59e0b;--radius:14px;
+:root{
+  --accent-1:#06b6d4; --accent-2:#f59e0b; --radius:14px;
+  --bg-dark:#0f1724; --card-dark:#0b1220; --text-dark:#e6f1f6;
+  --bg-light:#f7f9fb; --card-light:#fff; --text-light:#061122;
 }
-body {
- margin:0;font-family:'Inter',sans-serif;line-height:1.5;transition:background .4s,color .4s;
- background-color:#0f1724;color:#e6f1f6;
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:'Inter',system-ui, -apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+  transition: background .35s, color .35s;
+  background:var(--bg-dark);color:var(--text-dark);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
 }
-body[data-theme="light"]{background-color:#f7f9fb;color:#061122}
-body[data-theme="light"] .card{background:#fff;color:#061122;border-color:#e5e7eb}
-.container{max-width:1100px;margin:0 auto;padding:1.5rem}
-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
-.logo{font-weight:800;color:var(--accent-1);text-decoration:none;font-size:1.4rem;letter-spacing:-.5px}
+body[data-theme="light"]{ background:var(--bg-light); color:var(--text-light); }
+.container{max-width:1150px;margin:0 auto;padding:1.5rem}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;
+  backdrop-filter: blur(10px); background: rgba(15,23,36,.6); border-bottom:1px solid rgba(255,255,255,.06);
+}
+body[data-theme="light"] nav{ background: rgba(255,255,255,.9); }
+.logo{font-weight:800;color:var(--accent-1);font-size:1.4rem;text-decoration:none}
 .nav-links{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
-.nav-links a{color:inherit;text-decoration:none;position:relative;padding:.2rem .4rem;transition:.3s;font-weight:500}
-.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent-1);transition:.3s}
+.nav-links a{color:inherit;text-decoration:none;font-weight:600;position:relative;padding:.2rem .4rem}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent-1);transition:.25s}
 .nav-links a:hover::after{width:100%}
-.hamburger{display:none;background:none;border:0;color:inherit;cursor:pointer}
-.theme-toggle{background:none;border:0;color:inherit;cursor:pointer}
+.controls{display:flex;gap:.6rem;align-items:center}
+.theme-toggle{background:none;border:0;color:inherit;cursor:pointer;padding:.4rem;border-radius:8px}
+.hamburger{display:none;background:none;border:0;color:inherit;cursor:pointer;padding:.4rem;border-radius:8px}
+
+/* HERO */
 .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;padding:4rem 1.5rem}
-.hero h1{font-size:2.6rem;margin-bottom:.5rem}
+.hero h1{font-size:2.6rem;margin:0 0 .6rem}
 .typing{color:var(--accent-2);font-weight:700}
-.hero img{width:100%;border-radius:50%;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1rem;border-radius:12px;font-weight:600;text-decoration:none;cursor:pointer}
-.btn-primary{background:linear-gradient(90deg,var(--accent-1),#3dd5d0);color:#021018;box-shadow:0 4px 10px rgba(6,182,212,.4)}
-.btn-primary:hover{opacity:.9}
-.btn-secondary{border:1px solid rgba(255,255,255,.1);color:inherit}
-.section-title{font-size:1.6rem;margin:2rem 0 1rem;text-align:center;position:relative}
-.section-title::after{content:'';display:block;width:80px;height:3px;background:var(--accent-1);margin:.5rem auto;border-radius:999px}
-.card{background:#0b1220;border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,.05);transition:.4s}
-.card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.4)}
-.skills-grid,.projects-grid{display:grid;gap:1rem}
-.skills-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.progress-bar{background:rgba(255,255,255,.1);height:8px;border-radius:999px;margin-top:.5rem;overflow:hidden}
-.progress-fill{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));height:100%;width:0;transition:width 1s ease}
-.projects-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.project-card img{width:100%;height:190px;object-fit:cover;transition:.4s}
-.project-card:hover img{filter:brightness(.75)}
+.hero p{color:inherit;max-width:54ch;margin-bottom:1rem}
+.hero img{width:100%;max-width:360px;border-radius:50%;display:block;margin-left:auto;box-shadow:0 10px 30px rgba(2,6,23,.6);border:4px solid rgba(255,255,255,.04)}
+
+/* Buttons */
+.btn{display:inline-flex;gap:.6rem;align-items:center;padding:.7rem 1rem;border-radius:12px;font-weight:700;text-decoration:none}
+.btn-primary{background:linear-gradient(90deg,var(--accent-1),#3dd5d0);color:#021018}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.06);color:inherit;padding:.6rem .9rem;border-radius:10px}
+
+/* Sections */
+.section-title{font-size:1.5rem;margin:2rem 0 1rem;text-align:center}
+.section-sub{max-width:900px;margin:0 auto 1.2rem;color:rgba(255,255,255,.7);text-align:center}
+body[data-theme="light"] .section-sub{color:rgba(0,0,0,.6)}
+
+/* Cards */
+.card{background:var(--card-dark);border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,.04);transition:transform .25s, box-shadow .25s}
+body[data-theme="light"] .card{background:var(--card-light);border-color:#e8e8e8}
+.card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,6,23,.45)}
+
+/* Skills grid */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:start}
+.skill-row{display:flex;gap:.8rem;align-items:center}
+.devicon{font-size:28px;opacity:.95}
+.skill-name{font-weight:700}
+.progress-bar{height:8px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden;margin-top:.6rem}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));transition:width 1s ease}
+
+/* Projects grid */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.project-card img{width:100%;height:190px;object-fit:cover;border-radius:10px}
 .project-info{padding:1rem}
-.tech-tag{display:inline-block;background:rgba(255,255,255,.08);padding:.25rem .5rem;border-radius:999px;margin-right:.3rem;font-size:.8rem}
-.contact-form input,.contact-form textarea{width:100%;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:transparent;color:inherit}
-.contact-form button{margin-top:.8rem;width:100%}
-footer{text-align:center;padding:2rem 1rem;border-top:1px solid rgba(255,255,255,.05);margin-top:3rem}
-footer a{margin:0 .4rem;color:inherit;text-decoration:none}
-.scroll-top{position:fixed;right:1.2rem;bottom:1.2rem;padding:.6rem;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#021018;border:0;display:none;cursor:pointer}
+.project-actions{display:flex;gap:.6rem;margin-top:.8rem}
+.project-actions a{padding:.5rem .7rem;border-radius:10px;text-decoration:none;font-weight:700}
+.demo-btn{background:linear-gradient(90deg,var(--accent-1),#3dd5d0);color:#021018}
+.code-btn{background:transparent;border:1px solid rgba(255,255,255,.08);color:inherit}
+
+/* Contact */
+.contact-wrap{max-width:760px;margin:0 auto}
+.contact-form input,.contact-form textarea{width:100%;padding:.8rem;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:transparent;color:inherit;margin-top:.4rem}
+.contact-form button{margin-top:.8rem;padding:.8rem;border-radius:10px;width:100%;font-weight:800}
+
+/* Footer */
+footer{padding:2rem;text-align:center;border-top:1px solid rgba(255,255,255,.04);margin-top:3rem}
+footer a{margin:0 .4rem;color:inherit;opacity:.9}
+
+/* Misc */
+.scroll-top{position:fixed;right:1.2rem;bottom:1.2rem;padding:.6rem;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#021018;border:0;display:none}
 .scroll-top.show{display:block}
-@media(max-width:800px){.hero{grid-template-columns:1fr;text-align:center}.nav-links{display:none}.hamburger{display:block}}
+
+/* Responsive */
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr 340px;padding:3rem 1rem}
+}
+@media(max-width:720px){
+  nav{padding:.6rem 1rem}
+  .nav-links{display:none}
+  .hamburger{display:inline-block}
+  .hero{grid-template-columns:1fr;text-align:center}
+  .hero img{margin:1rem auto 0}
+}
 </style>
 </head>
 <body>
 <nav>
-<a href="#" class="logo">Abdullah</a>
-<ul class="nav-links">
-<li><a href="#hero">Home</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-<div>
-<button class="theme-toggle" id="theme-toggle"><i data-lucide="moon"></i></button>
-<button class="hamburger"><i data-lucide="menu"></i></button>
-</div>
+  <a class="logo" href="#">Abdullah</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="controls">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i data-lucide="moon"></i></button>
+  </div>
 </nav>
-<section class="hero" id="hero">
-<div>
-<h1>Hi, I'm Abdullah</h1>
-<p>I'm <span class="typing" id="typing-text">a Full Stack Developer.</span></p>
-<p>I build clean and user-focused full-stack applications using modern web technologies.</p>
-<a href="#projects" class="btn btn-primary">View My Work</a>
-<a href="#contact" class="btn btn-secondary">Contact Me</a>
-</div>
-<img src="images/my_pic.jpg" alt="Abdullah profile"/>
+
+<!-- HERO -->
+<section id="hero" class="hero container">
+  <div>
+    <h1>Hi, I'm Abdullah</h1>
+    <p class="section-sub">I'm <span class="typing" id="typing-text">a Full Stack Developer.</span> I build modern, scalable, and user-focused web applications.</p>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+      <a class="btn btn-primary" href="#projects">View My Work</a>
+      <a class="btn btn-ghost" href="#contact">Contact Me</a>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;align-items:center">
+    <img src="images/my_pic.jpg" alt="Abdullah profile" width="320" height="320" />
+  </div>
 </section>
-<section id="skills">
-<h2 class="section-title">Technical Expertise</h2>
-<div class="container skills-grid">
-<div class="card skill-card" data-skill="95"><strong>HTML, CSS & Responsiveness</strong><div class="progress-bar"><div class="progress-fill"></div></div></div>
-<div class="card skill-card" data-skill="90"><strong>JavaScript (ES6+)</strong><div class="progress-bar"><div class="progress-fill"></div></div></div>
-<div class="card skill-card" data-skill="88"><strong>React & State Management</strong><div class="progress-bar"><div class="progress-fill"></div></div></div>
-<div class="card skill-card" data-skill="85"><strong>Node.js & Express</strong><div class="progress-bar"><div class="progress-fill"></div></div></div>
-<div class="card skill-card" data-skill="80"><strong>MongoDB / MySQL</strong><div class="progress-bar"><div class="progress-fill"></div></div></div>
-<div class="card skill-card" data-skill="75"><strong>Version Control (Git)</strong><div class="progress-bar"><div class="progress-fill"></div></div></div>
-</div>
+
+<!-- SKILLS -->
+<section id="skills" class="container">
+  <h2 class="section-title">Skills & Languages</h2>
+  <p class="section-sub">Languages, frameworks and tools I use day-to-day.</p>
+
+  <div class="skills-grid">
+    <!-- Skill item: HTML -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-html5-plain devicon" title="HTML5"></i>
+        <div>
+          <div class="skill-name">HTML5</div>
+          <div class="skill-sub">Semantic markup & accessibility</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="95"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CSS -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-css3-plain devicon" title="CSS3"></i>
+        <div>
+          <div class="skill-name">CSS3 / SASS</div>
+          <div class="skill-sub">Flexbox, Grid, responsive design</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="94"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-javascript-plain devicon" title="JavaScript"></i>
+        <div>
+          <div class="skill-name">JavaScript (ES6+)</div>
+          <div class="skill-sub">Async, DOM, modular code</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="90"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- React -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-react-original devicon" title="React"></i>
+        <div>
+          <div class="skill-name">React</div>
+          <div class="skill-sub">Hooks, context, performance</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="88"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Node -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-nodejs-plain devicon" title="Node.js"></i>
+        <div>
+          <div class="skill-name">Node.js</div>
+          <div class="skill-sub">APIs, Express</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="85"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Database -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-mongodb-plain devicon" title="MongoDB"></i>
+        <div>
+          <div class="skill-name">MongoDB / MySQL</div>
+          <div class="skill-sub">Data modeling & querying</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="80"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHP -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-php-plain devicon" title="PHP"></i>
+        <div>
+          <div class="skill-name">PHP</div>
+          <div class="skill-sub">Legacy & server-side apps</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="78"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Git -->
+    <div class="card">
+      <div class="skill-row">
+        <i class="devicon-git-plain devicon" title="Git"></i>
+        <div>
+          <div class="skill-name">Git</div>
+          <div class="skill-sub">Branching, PRs, collaboration</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%" data-target="88"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<section id="projects">
-<h2 class="section-title">Featured Projects</h2>
-<div class="container projects-grid">
-<div class="card project-card"><img src="https://placehold.co/600x300/06b6d4/021018?text=Twitter+Clone"><div class="project-info"><h3>Twitter Clone</h3><p>Responsive clone of X (Twitter) UI.</p><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JS</span></div></div>
-<div class="card project-card"><img src="https://placehold.co/600x300/f59e0b/021018?text=E-Commerce+App"><div class="project-info"><h3>E-Commerce App</h3><p>Full-stack MERN shopping platform.</p><span class="tech-tag">React</span><span class="tech-tag">Node</span><span class="tech-tag">MongoDB</span></div></div>
-<div class="card project-card"><img src="https://placehold.co/600x300/06b6d4/021018?text=Portfolio+Site"><div class="project-info"><h3>Portfolio Website</h3><p>Dynamic portfolio showcasing skills.</p><span class="tech-tag">HTML</span><span class="tech-tag">JS</span></div></div>
-<div class="card project-card"><img src="https://placehold.co/600x300/f59e0b/021018?text=Weather+App"><div class="project-info"><h3>Weather App</h3><p>Fetches live weather via API.</p><span class="tech-tag">JS</span><span class="tech-tag">API</span></div></div>
-<div class="card project-card"><img src="https://placehold.co/600x300/06b6d4/021018?text=Blog+Platform"><div class="project-info"><h3>Blog Platform</h3><p>CRUD posts, comments, and likes.</p><span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span></div></div>
-<div class="card project-card"><img src="https://placehold.co/600x300/f59e0b/021018?text=Chat+App"><div class="project-info"><h3>Realtime Chat App</h3><p>Socket-based instant messaging app.</p><span class="tech-tag">Node</span><span class="tech-tag">Socket.io</span></div></div>
-</div>
+
+<!-- PROJECTS -->
+<section id="projects" class="container" style="margin-top:2rem;">
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-sub">Click Live Demo to view a deployed version, or Source Code to inspect the repository.</p>
+
+  <div class="projects-grid">
+    <!-- Project 1 -->
+    <div class="card project-card">
+      <img src="https://placehold.co/900x500/06b6d4/021018?text=Twitter+Clone" alt="Twitter Clone">
+      <div class="project-info">
+        <h3>Twitter (X) Clone</h3>
+        <p>Responsive UI-focused replica demonstrating layout and interactions.</p>
+        <div class="project-actions">
+          <a class="demo-btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="code-btn" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="card project-card">
+      <img src="https://placehold.co/900x500/f59e0b/021018?text=E-Commerce+App" alt="E-Commerce">
+      <div class="project-info">
+        <h3>E-Commerce App</h3>
+        <p>Full-stack MERN example with product pages and cart flow.</p>
+        <div class="project-actions">
+          <a class="demo-btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="code-btn" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="card project-card">
+      <img src="https://placehold.co/900x500/06b6d4/021018?text=Portfolio+Site" alt="Portfolio">
+      <div class="project-info">
+        <h3>Portfolio Website</h3>
+        <p>Previous portfolio with project gallery and clean UI components.</p>
+        <div class="project-actions">
+          <a class="demo-btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="code-btn" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="card project-card">
+      <img src="https://placehold.co/900x500/f59e0b/021018?text=Weather+App" alt="Weather App">
+      <div class="project-info">
+        <h3>Weather App</h3>
+        <p>Live API fetch of weather data with search and caching.</p>
+        <div class="project-actions">
+          <a class="demo-btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="code-btn" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="card project-card">
+      <img src="https://placehold.co/900x500/06b6d4/021018?text=Blog+Platform" alt="Blog Platform">
+      <div class="project-info">
+        <h3>Blog Platform</h3>
+        <p>CRUD posts, comments and roles — PHP/MySQL stack demo.</p>
+        <div class="project-actions">
+          <a class="demo-btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="code-btn" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6 -->
+    <div class="card project-card">
+      <img src="https://placehold.co/900x500/f59e0b/021018?text=Chat+App" alt="Chat App">
+      <div class="project-info">
+        <h3>Realtime Chat App</h3>
+        <p>Socket-based realtime messaging (Node + Socket.io).</p>
+        <div class="project-actions">
+          <a class="demo-btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="code-btn" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<section id="contact">
-<h2 class="section-title">Let's Connect</h2>
-<div class="container">
-<form class="card contact-form" id="contact-form">
-<label>Name</label><input id="name" required>
-<label>Email</label><input id="email" type="email" required>
-<label>Message</label><textarea id="message" rows="4" required></textarea>
-<button type="submit" class="btn btn-primary">Send Message</button>
-<div id="form-status" style="margin-top:.5rem;font-size:.9rem"></div>
-</form>
-</div>
+
+<!-- CONTACT -->
+<section id="contact" class="container" style="margin-top:2rem;">
+  <h2 class="section-title">Let's Connect</h2>
+  <div class="contact-wrap">
+    <form id="contact-form" class="card contact-form" autocomplete="off">
+      <label for="name">Name</label>
+      <input id="name" name="name" required placeholder="Your name">
+
+      <label for="email" style="margin-top:.6rem">Email</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com">
+
+      <label for="message" style="margin-top:.6rem">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <div id="form-status" style="margin-top:.6rem;font-size:.95rem"></div>
+    </form>
+  </div>
 </section>
+
 <footer>
-<p>© 2025 Abdullah. All Rights Reserved.</p>
-<div><a href="#" aria-label="GitHub"><i data-lucide="github"></i></a><a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a><a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a></div>
+  <div style="margin-bottom:.6rem">© 2025 Abdullah. All Rights Reserved.</div>
+  <div>
+    <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+  </div>
 </footer>
-<button id="scroll-top" class="scroll-top"><i data-lucide="chevron-up"></i></button>
+
+<button id="scroll-top" class="scroll-top" aria-label="Scroll to top"><i data-lucide="chevron-up"></i></button>
+
 <script>
+/* ====== CONFIG: put your Apps Script URL here =====
+   - Deploy the Apps Script (Code.gs below) as Web App
+   - Execute the web app as: Me
+   - Who has access: Anyone (even anonymous)
+   Then paste the URL here (SCRIPT_URL)
+*/
+const SCRIPT_URL = ''; // <-- set your deployed Apps Script URL here
+
+// set initial theme (prefers + saved)
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const savedTheme = localStorage.getItem('theme');
-const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-document.body.dataset.theme = theme;
+document.body.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
 
-// Initialize icons
 lucide.createIcons();
 
-// Typing effect
-const typing = document.getElementById('typing-text');
+// Typing animation
+const typingEl = document.getElementById('typing-text');
 const phrases = ["a Full Stack Developer.", "a Frontend Specialist.", "a Problem Solver."];
-let pi = 0, ci = 0, del = false;
-function type() {
+let pi = 0, ci = 0, deleting = false;
+function typeLoop() {
   const cur = phrases[pi];
-  typing.textContent = cur.slice(0, ci);
-  ci += del ? -1 : 1;
-  if (!del && ci === cur.length) {
-    del = true; setTimeout(type, 1000);
-  } else if (del && ci === 0) {
-    del = false; pi = (pi + 1) % phrases.length; setTimeout(type, 300);
-  } else setTimeout(type, del ? 60 : 100);
+  typingEl.textContent = cur.slice(0, ci);
+  ci += deleting ? -1 : 1;
+  if (!deleting && ci === cur.length) { deleting = true; setTimeout(typeLoop, 1200); }
+  else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(typeLoop, 400); }
+  else setTimeout(typeLoop, deleting ? 50 : 90);
 }
-type();
+typeLoop();
 
-// Theme toggle logic
-const toggle = document.getElementById('theme-toggle');
-function updateIcon() {
-  const icon = toggle.querySelector("i");
-  icon.setAttribute("data-lucide", document.body.dataset.theme === "light" ? "moon" : "sun");
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+function updateThemeIcon() {
+  const i = themeToggle.querySelector('i');
+  i.setAttribute('data-lucide', document.body.dataset.theme === 'light' ? 'moon' : 'sun');
   lucide.createIcons();
 }
-updateIcon();
-
-toggle.addEventListener('click', () => {
-  const newTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
-  document.body.dataset.theme = newTheme;
-  localStorage.setItem('theme', newTheme);
-  updateIcon();
+updateThemeIcon();
+themeToggle.addEventListener('click', () => {
+  const next = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+  document.body.dataset.theme = next;
+  localStorage.setItem('theme', next);
+  themeToggle.classList.add('rot');
+  updateThemeIcon();
+  setTimeout(()=>themeToggle.classList.remove('rot'), 420);
 });
 
-// Animate skill bars
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const f = e.target.querySelector('.progress-fill');
-      if (f) { f.style.width = e.target.dataset.skill + '%'; }
-      observer.unobserve(e.target);
+// skill progress animation when visible
+const skillObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(ent => {
+    if (ent.isIntersecting) {
+      ent.target.querySelectorAll('.progress-fill').forEach(el => {
+        const target = el.getAttribute('data-target') || el.style.width || '75';
+        // animate width
+        el.style.width = target + '%';
+      });
+      obs.unobserve(ent.target);
     }
   });
-}, { threshold: .3 });
-document.querySelectorAll('.skill-card').forEach(s => observer.observe(s));
+}, { threshold: 0.35 });
+document.querySelectorAll('.card.skill-card').forEach(el => skillObserver.observe(el));
 
-// Scroll to top
-const scrollTop = document.getElementById('scroll-top');
-window.addEventListener('scroll', () => {
-  scrollTop.classList.toggle('show', window.scrollY > 300);
-});
-scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+// Scroll top button
+const scrollTopBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('show', window.scrollY > 300));
+scrollTopBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
 
-// Contact form (demo)
+// Contact form submit -> Google Apps Script
 const form = document.getElementById('contact-form');
-const status = document.getElementById('form-status');
-form.addEventListener('submit', e => {
+const statusEl = document.getElementById('form-status');
+form.addEventListener('submit', (e) => {
   e.preventDefault();
-  status.textContent = 'Message sent (demo).';
+  statusEl.textContent = '';
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  const formData = new FormData(form);
+
+  if (!SCRIPT_URL) {
+    // Demo behavior if no URL set
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+      statusEl.textContent = '✅ (Demo) Message prepared. Add your SCRIPT_URL to post to Google Sheets.';
+      form.reset();
+    }, 800);
+    return;
+  }
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'cors',
+    body: formData
+  })
+  .then(res => res.json ? res.json() : res.text())
+  .then(data => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+    // Expecting JSON { result: 'success' } from Apps Script
+    if (data && data.result === 'success') {
+      statusEl.textContent = '✅ Thank you! Your message was received.';
+      form.reset();
+    } else {
+      statusEl.textContent = '❌ Something went wrong. Try again later.';
+      console.error('Unexpected response', data);
+    }
+  })
+  .catch(err => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+    statusEl.textContent = '❌ Submission failed. Check console.';
+    console.error(err);
+  });
 });
 </script>
-
 </body>
 </html>
