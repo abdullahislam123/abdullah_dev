@@ -1,562 +1,510 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Abdullah — Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah — Portfolio</title>
 
-<!-- Inter font -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<!-- Devicon (language icons) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <!-- Devicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-<!-- Lucide icons -->
-<script src="https://unpkg.com/lucide/dist/lucide.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide/dist/lucide.min.js"></script>
 
-<!-- GSAP (for flashy animations) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-MmZgX6oQ+6Zf6fNppq0g7k1v3m0L2qg0Pm+6C7Dw5yO8g7TQkQO9sQXg6i5wIYqE9F8v+8yJ5bqKq3h8uP3w2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<!-- VanillaTilt (card tilt) -->
-<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+    <style>
+        :root {
+            --accent1: #06b6d4;
+            --accent2: #f59e0b;
+            --radius: 14px;
+        }
 
-<style>
-  :root{
-    --accent-1:#06b6d4;
-    --accent-2:#f59e0b;
-    --bg-dark:#08101a;
-    --card-dark: rgba(255,255,255,0.03);
-    --glass: rgba(255,255,255,0.03);
-    --radius:14px;
-  }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            transition: background .5s, color .5s;
+            background-color: #0f1724;
+            color: #e6f1f6;
+        }
 
-  /* Basic */
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    background:linear-gradient(180deg,var(--bg-dark),#03121a);
-    color:#e8f3f6;
-    transition: background .45s ease, color .35s ease;
-    overflow-x:hidden;
-  }
-  body[data-theme="light"]{
-    --accent-1:#0ea5b7;
-    --accent-2:#f59e0b;
-    background:linear-gradient(180deg,#f7fbfe,#eef6fa);
-    color:#061122;
-  }
-  .container{max-width:1150px;margin:0 auto;padding:1.25rem}
+        body[data-theme="light"] {
+            background: #f7f9fb;
+            color: #061122;
+        }
 
-  /* animated gradient backdrop */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:-2;
-    background:linear-gradient(120deg, rgba(6,182,212,0.06), rgba(245,158,11,0.04), rgba(46,43,111,0.03));
-    filter:blur(30px);
-    animation: bgShift 22s linear infinite;
-    pointer-events:none;
-  }
-  @keyframes bgShift{
-    0%{transform:translateX(-10%) translateY(-5%) rotate(0deg)}
-    50%{transform:translateX(12%) translateY(5%) rotate(6deg)}
-    100%{transform:translateX(-10%) translateY(-5%) rotate(0deg)}
-  }
+        a {
+            text-decoration: none;
+            color: inherit
+        }
 
-  /* nav */
-  nav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1150px;margin:0 auto;padding:.9rem 1.25rem}
-  .logo{font-weight:800;color:var(--accent-1);font-size:1.25rem;text-decoration:none}
-  .nav-links{display:flex;gap:1rem;align-items:center}
-  .nav-links a{padding:.25rem .5rem;border-radius:8px;position:relative;font-weight:600;color:inherit;text-decoration:none}
-  .nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:3px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));transition:width .28s}
-  .nav-links a:hover::after{width:100%}
-  .controls{display:flex;align-items:center;gap:.6rem}
-  .theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:.45rem;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
-  .theme-toggle.rotate{transform:rotate(180deg) scale(1.03);transition:transform .45s}
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem
+        }
 
-  /* hero */
-  .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;padding:3.6rem 1.25rem}
-  .intro h1{font-size:2.6rem;margin:0 0 .6rem;letter-spacing:-.3px}
-  .tagline{color:rgba(255,255,255,0.80);max-width:56ch;margin-bottom:1rem}
-  .hero-cta{display:flex;gap:.75rem;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:12px;font-weight:700;cursor:pointer}
-  .btn-primary{background:linear-gradient(90deg,var(--accent-1),#3dd5d0);color:#021018;box-shadow:0 10px 30px rgba(6,182,212,0.08)}
-  .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit}
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .8rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .1)
+        }
 
-  .avatar{display:flex;justify-content:center;align-items:center}
-  .avatar img{width:320px;height:320px;object-fit:cover;border-radius:50%;border:6px solid rgba(255,255,255,0.04);box-shadow:0 18px 50px rgba(2,6,23,0.6)}
+        .logo {
+            font-weight: 800;
+            color: var(--accent1);
+            font-size: 1.4rem
+        }
 
-  /* sections */
-  .section{padding:2rem 1.25rem}
-  .section-title{font-size:1.6rem;margin:0 0 1rem;text-align:center}
-  .section-sub{max-width:920px;margin:0 auto 1.2rem;text-align:center;color:rgba(255,255,255,0.7)}
-  body[data-theme="light"] .section-sub{color:rgba(0,0,0,0.65)}
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            list-style: none
+        }
 
-  /* skills grid */
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-  .skill-card{display:flex;gap:.9rem;align-items:center;padding:.9rem;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));border:1px solid rgba(255,255,255,0.03)}
-  .skill-icon{font-size:30px;opacity:1}
-  .skill-meta .name{font-weight:800}
-  .progress-bar{height:8px;background:white;border-radius:999px;overflow:hidden;margin-top:.6rem}
-  .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));transition:width 1s cubic-bezier(.2,.9,.2,1)}
+        .nav-links a {
+            position: relative;
+            font-weight: 500
+        }
 
-  /* Projects */
-  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
-  .project-card{border-radius:12px;padding:0;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));overflow:hidden}
-  .project-media{position:relative}
-  .project-media img{width:100%;height:190px;object-fit:cover;display:block;transition:transform .35s, filter .35s}
-  .project-body{padding:1rem}
-  .project-title{font-size:1.05rem;margin:0 0 .25rem}
-  .project-desc{color:rgba(255,255,255,0.75);margin:0 0 .6rem}
-  .project-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-  .project-actions a{padding:.48rem .7rem;border-radius:9px;text-decoration:none;font-weight:700}
-  .demo-btn{background:linear-gradient(90deg,var(--accent-1),#3dd5d0);color:#021018}
-  .code-btn{background:transparent;border:1px solid rgba(255,255,255,0.08);color:inherit}
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent1);
+            transition: .3s
+        }
 
-  /* contact */
-  .contact-card{max-width:760px;margin:0 auto;padding:1rem;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
-  input[type="text"],input[type="email"],textarea{width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;margin-top:.4rem}
-  .form-submit{margin-top:1rem;padding:.9rem;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+        .nav-links a:hover::after {
+            width: 100%
+        }
 
-  footer{padding:2rem 1.25rem;text-align:center;border-top:1px solid rgba(255,255,255,0.03);margin-top:2.5rem;color:rgba(255,255,255,0.8)}
-  footer a{margin:0 .4rem;color:inherit;opacity:.9}
+        .theme-toggle {
+            background: none;
+            border: 0;
+            cursor: pointer;
+            color: inherit
+        }
 
-  /* scroll top */
-  #scroll-top{position:fixed;right:1.2rem;bottom:1.2rem;padding:.6rem;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));border:none;color:#021018;cursor:pointer;display:none}
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 2rem;
+            align-items: center;
+            padding: 5rem 1.5rem
+        }
 
-  /* small screens */
-  @media(max-width:920px){.hero{grid-template-columns:1fr 300px;padding:3rem 1rem}}
-  @media(max-width:720px){
-    .nav-links{display:none}
-    .hero{grid-template-columns:1fr;text-align:center;padding:2.2rem 1rem}
-    .avatar img{width:220px;height:220px}
-    .project-media img{height:160px}
-  }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: .3rem
+        }
 
-  /* ---------- Devicon original colors (explicit) ---------- */
-  /* Not all devicon fonts are colored by default; to ensure reliable original colors we set them here */
-  .devicon-html5-plain{color:#E34F26}
-  .devicon-css3-plain{color:#1572B6}
-  .devicon-javascript-plain{color:#F7DF1E}
-  .devicon-react-original{color:#61DAFB}
-  .devicon-nodejs-plain{color:#339933}
-  .devicon-mongodb-plain{color:#47A248}
-  .devicon-php-plain{color:#777BB4}
-  .devicon-git-plain{color:#F05032}
-  /* fallback for icons that might use svg or different class names */
-  i.devicon{font-size:28px;line-height:1}
-</style>
+        .hero p {
+            max-width: 500px
+        }
+
+        .hero img {
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .5)
+        }
+
+        .typing {
+            color: var(--accent2);
+            font-weight: 700
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .7rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            gap: .5rem;
+            cursor: pointer;
+            transition: .3s
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent1), #3dd5d0);
+            color: #021018;
+            box-shadow: 0 4px 10px rgba(6, 182, 212, .4)
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px)
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, .2)
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 2.5rem 0 1.2rem;
+            position: relative
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent1);
+            margin: .5rem auto;
+            border-radius: 999px
+        }
+
+        .skills-grid,
+        .projects-grid {
+            display: grid;
+            gap: 1.2rem
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, .05);
+            padding: 1.2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: .3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, .08)
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.02)
+        }
+
+        .skill-card i {
+            font-size: 48px;
+            margin-bottom: .5rem
+        }
+
+        .projects-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, .05);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: .4s;
+            backdrop-filter: blur(10px)
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: .4s
+        }
+
+        .project-info {
+            padding: 1rem
+        }
+
+        .project-card:hover img {
+            filter: brightness(.8)
+        }
+
+        .project-links {
+            display: flex;
+            gap: .6rem;
+            margin-top: .6rem
+        }
+
+        .project-links a {
+            flex: 1;
+            text-align: center;
+            padding: .5rem 0;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .project-links .live {
+            background: linear-gradient(90deg, var(--accent1), #3dd5d0);
+            color: #021018
+        }
+
+        .project-links .code {
+            border: 1px solid rgba(255, 255, 255, .3)
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: .7rem;
+            margin-bottom: .6rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            background: transparent;
+            color: inherit
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, .05)
+        }
+
+        footer a {
+            margin: 0 .5rem
+        }
+
+        .scroll-top {
+            position: fixed;
+            right: 1.2rem;
+            bottom: 1.2rem;
+            padding: .6rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent1), var(--accent2));
+            color: #021018;
+            border: 0;
+            display: none;
+            cursor: pointer
+        }
+
+        .scroll-top.show {
+            display: block
+        }
+
+        @media(max-width:800px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner container">
-      <a class="logo" href="#">Abdullah</a>
+    <nav>
+        <a href="#" class="logo">Abdullah</a>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="theme-toggle"><i data-lucide="moon"></i></button>
+    </nav>
 
-      <div class="nav-links" role="navigation" aria-label="Main">
-        <a href="#hero">Home</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <div class="controls">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <i data-lucide="moon"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header id="hero" class="hero container" role="banner">
-    <div class="intro">
-      <h1>Hi, I'm Abdullah</h1>
-      <p class="tagline">I'm <span id="typing-text" class="typing">a Full Stack Developer.</span> I build modern, scalable, and user-focused web applications.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#projects">View My Work</a>
-        <a class="btn btn-outline" href="#contact">Get In Touch</a>
-      </div>
-    </div>
-
-    <div class="avatar" aria-hidden="true">
-      <img src="images/my_pic.jpg" alt="Abdullah — profile photo (replace with your image)">
-    </div>
-  </header>
-
-  <!-- SKILLS -->
-  <section id="skills" class="section container" aria-labelledby="skills-title">
-    <h2 id="skills-title" class="section-title">Skills & Languages</h2>
-    <p class="section-sub">Languages, frameworks and tools I use daily — with proficiency and practical experience.</p>
-
-    <div class="skills-grid" role="list">
-      <div class="skill-card card skill-card" data-skill="95" role="listitem" aria-label="HTML5 95%">
-        <i class="devicon-html5-plain skill-icon" title="HTML5" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">HTML5</div>
-          <div class="skill-sub">Semantic markup & accessibility</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="95"></div></div>
+    <section class="hero" id="hero">
+        <div>
+            <h1>Hi, I'm Abdullah 👋</h1>
+            <p>I'm <span class="typing" id="typing-text">a Full Stack Developer.</span></p>
+            <p>I design and develop engaging, responsive, and user-friendly web applications.</p>
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-secondary">Contact Me</a>
         </div>
-      </div>
+        <img src="images/my_pic.jpg" alt="Abdullah portrait">
+    </section>
 
-      <div class="skill-card card skill-card" data-skill="94" role="listitem" aria-label="CSS 94%">
-        <i class="devicon-css3-plain skill-icon" title="CSS3" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">CSS / SASS</div>
-          <div class="skill-sub">Flexbox, Grid, responsive & animations</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="94"></div></div>
+    <section id="skills">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="container skills-grid">
+            <div class="skill-card"><i class="devicon-html5-plain colored"></i>
+                <h4>HTML5</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-css3-plain colored"></i>
+                <h4>CSS3</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-javascript-plain colored"></i>
+                <h4>JavaScript</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-react-original colored"></i>
+                <h4>React</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-nodejs-plain colored"></i>
+                <h4>Node.js</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-mongodb-plain colored"></i>
+                <h4>MongoDB</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-mysql-plain colored"></i>
+                <h4>MySQL</h4>
+            </div>
+            <div class="skill-card"><i class="devicon-git-plain colored"></i>
+                <h4>Git & Version Control</h4>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="skill-card card skill-card" data-skill="90" role="listitem" aria-label="JavaScript 90%">
-        <i class="devicon-javascript-plain skill-icon" title="JavaScript" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">JavaScript (ES6+)</div>
-          <div class="skill-sub">Async, modules, patterns</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="90"></div></div>
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="container projects-grid">
+            <!-- Repeat structure for all projects -->
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/06b6d4/021018?text=Calculator" alt="Calculator Project">
+                <div class="project-info">
+                    <h3>Calculator</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/calculator/" target="_blank">Live
+                            Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/calculator" target="_blank">Source
+                            Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/f59e0b/021018?text=Unit+Converter">
+                <div class="project-info">
+                    <h3>Unit Converter</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/temperature-and-distance-converter/"
+                            target="_blank">Live Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/temperature-and-distance-converter"
+                            target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/06b6d4/021018?text=Rock+Paper+Scissor">
+                <div class="project-info">
+                    <h3>Rock Paper Scissor</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/rock-papaer-scissor/"
+                            target="_blank">Live Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/rock-papaer-scissor"
+                            target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/f59e0b/021018?text=Stopwatch">
+                <div class="project-info">
+                    <h3>Stopwatch</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/Stopwatch/" target="_blank">Live
+                            Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/Stopwatch" target="_blank">Source
+                            Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/06b6d4/021018?text=Expense+Tracker">
+                <div class="project-info">
+                    <h3>Daily Expense Tracker</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/expense-tracker/" target="_blank">Live
+                            Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/smart-expense-manager"
+                            target="_blank">Source Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/f59e0b/021018?text=Twitter+Clone">
+                <div class="project-info">
+                    <h3>Twitter Clone</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/twitter-clone/" target="_blank">Live
+                            Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/twitter-clone" target="_blank">Source
+                            Code</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x300/06b6d4/021018?text=Portfolio">
+                <div class="project-info">
+                    <h3>Portfolio</h3>
+                    <div class="project-links">
+                        <a class="live" href="https://abdullahislam123.github.io/abdullah_dev/" target="_blank">Live
+                            Preview</a>
+                        <a class="code" href="https://github.com/abdullahislam123/abdullah_dev" target="_blank">Source
+                            Code</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="skill-card card skill-card" data-skill="88" role="listitem" aria-label="React 88%">
-        <i class="devicon-react-original skill-icon" title="React" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">React</div>
-          <div class="skill-sub">Hooks, context, performance</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="88"></div></div>
+    <section id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="container">
+            <form class="card contact-form" id="contact-form" name="contact-form">
+                <input name="name" placeholder="Your Name" required>
+                <input name="email" type="email" placeholder="Your Email" required>
+                <textarea name="message" rows="4" placeholder="Message..." required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <div id="form-status" style="margin-top:.5rem;font-size:.9rem"></div>
+            </form>
         </div>
-      </div>
+    </section>
 
-      <div class="skill-card card skill-card" data-skill="85" role="listitem" aria-label="Node 85%">
-        <i class="devicon-nodejs-plain skill-icon" title="Node.js" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">Node.js</div>
-          <div class="skill-sub">APIs, Express</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="85"></div></div>
-        </div>
-      </div>
+    <footer>
+        <p>© 2025 Abdullah. All Rights Reserved.</p>
+        <div><a href="#"><i data-lucide="github"></i></a> <a href="#"><i data-lucide="linkedin"></i></a></div>
+    </footer>
 
-      <div class="skill-card card skill-card" data-skill="80" role="listitem" aria-label="MongoDB 80%">
-        <i class="devicon-mongodb-plain skill-icon" title="MongoDB" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">MongoDB / MySQL</div>
-          <div class="skill-sub">Data modeling & queries</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="80"></div></div>
-        </div>
-      </div>
+    <button id="scroll-top" class="scroll-top"><i data-lucide="chevron-up"></i></button>
 
-      <div class="skill-card card skill-card" data-skill="78" role="listitem" aria-label="PHP 78%">
-        <i class="devicon-php-plain skill-icon" title="PHP" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">PHP</div>
-          <div class="skill-sub">Server-side & legacy apps</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="78"></div></div>
-        </div>
-      </div>
+    <script>
+        // THEME TOGGLE
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.body.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        lucide.createIcons();
+        const toggle = document.getElementById('theme-toggle');
+        function updateIcon() { toggle.innerHTML = ''; const i = document.createElement('i'); i.setAttribute('data-lucide', document.body.dataset.theme === 'light' ? 'moon' : 'sun'); toggle.appendChild(i); lucide.createIcons(); }
+        updateIcon();
+        toggle.addEventListener('click', () => {
+            const newTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
+            document.body.dataset.theme = newTheme; localStorage.setItem('theme', newTheme); updateIcon();
+        });
 
-      <div class="skill-card card skill-card" data-skill="88" role="listitem" aria-label="Git 88%">
-        <i class="devicon-git-plain skill-icon" title="Git" aria-hidden="true"></i>
-        <div class="skill-meta">
-          <div class="name">Git</div>
-          <div class="skill-sub">Branching, PRs, CI workflows</div>
-          <div class="progress-bar"><div class="progress-fill" data-target="88"></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+        // TYPING
+        const typing = document.getElementById('typing-text');
+        const phrases = ["a Full Stack Developer.", "a Frontend Specialist.", "a Problem Solver."];
+        let pi = 0, ci = 0, del = false;
+        function type() { const cur = phrases[pi]; typing.textContent = cur.slice(0, ci); ci += del ? -1 : 1; if (!del && ci === cur.length) { del = true; setTimeout(type, 1000); } else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(type, 400); } else setTimeout(type, del ? 60 : 100); } type();
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section container" aria-labelledby="projects-title">
-    <h2 id="projects-title" class="section-title">Featured Projects</h2>
-    <p class="section-sub">Click Live Demo to view a deployed version, or Source Code to inspect the repository.</p>
+        // SCROLL TOP
+        const scrollTop = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => scrollTop.classList.toggle('show', window.scrollY > 300));
+        scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    <div class="projects-grid">
-      <!-- Project 1 -->
-      <article class="project-card card" data-tilt data-tilt-scale="1.03" data-tilt-max="12" data-tilt-speed="700" aria-labelledby="p1-title">
-        <div class="project-media"><img src="https://placehold.co/900x500/06b6d4/021018?text=Twitter+Clone" alt="Twitter Clone preview"></div>
-        <div class="project-body">
-          <h3 id="p1-title" class="project-title">Twitter (X) Clone</h3>
-          <p class="project-desc">Responsive UI-focused replica demonstrating layout and interactions.</p>
-          <div class="project-actions">
-            <a class="demo-btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-            <a class="code-btn btn-outline" href="#" target="_blank" rel="noopener">Source Code</a>
-          </div>
-        </div>
-      </article>
+        // CONTACT FORM (Google Sheets)
+        const form = document.forms['contact-form'];
+        const status = document.getElementById('form-status');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch('https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec', { method: 'POST', body: new FormData(form) })
+                .then(() => { status.textContent = 'Message sent successfully!'; form.reset(); })
+                .catch(() => { status.textContent = 'Error sending message.'; });
+        });
 
-      <!-- Project 2 -->
-      <article class="project-card card" data-tilt data-tilt-scale="1.03" data-tilt-max="12" data-tilt-speed="700" aria-labelledby="p2-title">
-        <div class="project-media"><img src="https://placehold.co/900x500/f59e0b/021018?text=E-Commerce+App" alt="E-Commerce preview"></div>
-        <div class="project-body">
-          <h3 id="p2-title" class="project-title">E-Commerce App</h3>
-          <p class="project-desc">Full-stack MERN example with product pages and cart flow.</p>
-          <div class="project-actions">
-            <a class="demo-btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-            <a class="code-btn btn-outline" href="#" target="_blank" rel="noopener">Source Code</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 3 -->
-      <article class="project-card card" data-tilt data-tilt-scale="1.03" data-tilt-max="12" data-tilt-speed="700" aria-labelledby="p3-title">
-        <div class="project-media"><img src="https://placehold.co/900x500/06b6d4/021018?text=Portfolio+Site" alt="Portfolio preview"></div>
-        <div class="project-body">
-          <h3 id="p3-title" class="project-title">Portfolio Website</h3>
-          <p class="project-desc">A dynamic portfolio showcasing projects & case notes.</p>
-          <div class="project-actions">
-            <a class="demo-btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-            <a class="code-btn btn-outline" href="#" target="_blank" rel="noopener">Source Code</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 4 -->
-      <article class="project-card card" data-tilt data-tilt-scale="1.03" data-tilt-max="12" data-tilt-speed="700" aria-labelledby="p4-title">
-        <div class="project-media"><img src="https://placehold.co/900x500/f59e0b/021018?text=Weather+App" alt="Weather App preview"></div>
-        <div class="project-body">
-          <h3 id="p4-title" class="project-title">Weather App</h3>
-          <p class="project-desc">Live API fetch of weather data with caching & search.</p>
-          <div class="project-actions">
-            <a class="demo-btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-            <a class="code-btn btn-outline" href="#" target="_blank" rel="noopener">Source Code</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 5 -->
-      <article class="project-card card" data-tilt data-tilt-scale="1.03" data-tilt-max="12" data-tilt-speed="700" aria-labelledby="p5-title">
-        <div class="project-media"><img src="https://placehold.co/900x500/06b6d4/021018?text=Blog+Platform" alt="Blog Platform preview"></div>
-        <div class="project-body">
-          <h3 id="p5-title" class="project-title">Blog Platform</h3>
-          <p class="project-desc">CRUD posts, comments and role-based pages (PHP/MySQL).</p>
-          <div class="project-actions">
-            <a class="demo-btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-            <a class="code-btn btn-outline" href="#" target="_blank" rel="noopener">Source Code</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Project 6 -->
-      <article class="project-card card" data-tilt data-tilt-scale="1.03" data-tilt-max="12" data-tilt-speed="700" aria-labelledby="p6-title">
-        <div class="project-media"><img src="https://placehold.co/900x500/f59e0b/021018?text=Chat+App" alt="Chat App preview"></div>
-        <div class="project-body">
-          <h3 id="p6-title" class="project-title">Realtime Chat App</h3>
-          <p class="project-desc">Socket.io realtime messaging with presence & rooms.</p>
-          <div class="project-actions">
-            <a class="demo-btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-            <a class="code-btn btn-outline" href="#" target="_blank" rel="noopener">Source Code</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="section container" aria-labelledby="contact-title">
-    <h2 id="contact-title" class="section-title">Let's work together</h2>
-    <p class="section-sub">Send a short message — I typically reply within 1–2 business days.</p>
-
-    <form id="contact-form" class="contact-card" autocomplete="off" aria-label="Contact form">
-      <div class="form-row">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required placeholder="Your full name">
-      </div>
-
-      <div class="form-row">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required placeholder="you@example.com">
-      </div>
-
-      <div class="form-row">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required placeholder="Describe the project or opportunity..."></textarea>
-      </div>
-
-      <div class="form-row">
-        <button id="submit-btn" class="form-submit btn-primary" type="submit">Send Message</button>
-        <div id="form-status" style="margin-top:.6rem;font-weight:700"></div>
-      </div>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div>© 2025 Abdullah — Built with care.</div>
-    <div style="margin-top:.5rem">
-      <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
-      <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-      <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-    </div>
-  </footer>
-
-  <button id="scroll-top" aria-label="Scroll to top"><i data-lucide="chevron-up"></i></button>
-
-<script>
-/* =======================
-   CONFIG (replace)
-   =======================
-   To enable sending contact form submissions to Google Sheets:
-   1) Deploy the Apps Script web app (Code.gs provided earlier) and copy its Web App URL.
-   2) Paste the Web App URL below as SCRIPT_URL.
-*/
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec'; // <-- paste your Google Apps Script web app URL here
-
-// Initialize lucide icons
-lucide.createIcons();
-
-// Theme initialization & toggle
-(function initTheme(){
-  const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const startTheme = saved || (prefersDark ? 'dark' : 'light');
-  document.body.dataset.theme = startTheme;
-  updateThemeIcon();
-})();
-
-const themeToggle = document.getElementById('theme-toggle');
-function updateThemeIcon(){
-  const i = themeToggle.querySelector('i');
-  i.setAttribute('data-lucide', document.body.dataset.theme === 'light' ? 'moon' : 'sun');
-  lucide.createIcons();
-}
-themeToggle.addEventListener('click', ()=>{
-  const next = document.body.dataset.theme === 'light' ? 'dark' : 'light';
-  document.body.dataset.theme = next;
-  localStorage.setItem('theme', next);
-  themeToggle.classList.add('rotate');
-  updateThemeIcon();
-  setTimeout(()=> themeToggle.classList.remove('rotate'), 420);
-});
-
-// Typing animation
-(function typing(){
-  const el = document.getElementById('typing-text');
-  const phrases = ["a Full Stack Developer.","a Frontend Specialist.","a Problem Solver."];
-  let pi=0, ci=0, deleting=false;
-  function loop(){
-    const cur = phrases[pi];
-    el.textContent = cur.slice(0, ci);
-    ci += deleting ? -1 : 1;
-    if(!deleting && ci === cur.length){ deleting = true; setTimeout(loop, 1200); }
-    else if(deleting && ci === 0){ deleting = false; pi=(pi+1)%phrases.length; setTimeout(loop, 300); }
-    else setTimeout(loop, deleting ? 40 : 80);
-  }
-  loop();
-})();
-
-// GSAP entrance animations
-window.addEventListener('load', ()=>{
-  try {
-    gsap.from('.intro h1', {y:30, opacity:0, duration:0.9, ease:'power3.out'});
-    gsap.from('.tagline', {y:18, opacity:0, duration:0.9, delay:.12, ease:'power3.out'});
-    gsap.from('.hero-cta .btn', {y:10, opacity:0, duration:0.7, delay:.25, stagger:.12});
-    gsap.from('.avatar img', {scale:.95, opacity:0, duration:1, delay:.2, ease:'elastic.out(1,0.6)'});
-    gsap.from('.skill-card', {y:20, opacity:0, duration:.8, stagger:.08, delay:.4, ease:'power3.out'});
-    gsap.from('.project-card', {y:28, opacity:0, duration:.9, stagger:.09, delay:.6, ease:'power3.out'});
-  } catch(e){
-    // GSAP missing? silently ignore
-    console.warn('GSAP error', e);
-  }
-});
-
-// VanillaTilt for projects
-try {
-  VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-    max: 12, speed: 700, scale: 1.03, glare: true, "max-glare": 0.12
-  });
-} catch (e) { console.warn('VanillaTilt load error', e); }
-
-// Skill progress animation using IntersectionObserver
-const skillObserver = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.querySelectorAll('.progress-fill').forEach(el=>{
-        const target = el.getAttribute('data-target') || '75';
-        el.style.width = target + '%';
-      });
-      obs.unobserve(entry.target);
-    }
-  });
-},{threshold:0.28});
-document.querySelectorAll('.skill-card').forEach(s => skillObserver.observe(s));
-
-// Hover image subtle animation
-document.querySelectorAll('.project-card').forEach(card=>{
-  card.addEventListener('mouseenter', ()=> {
-    const img = card.querySelector('img');
-    gsap.to(img, {scale:1.03, duration:.35, ease:'power1.out'});
-  });
-  card.addEventListener('mouseleave', ()=> {
-    const img = card.querySelector('img');
-    gsap.to(img, {scale:1, duration:.35, ease:'power1.out'});
-  });
-});
-
-// Scroll top button
-const scrollTopBtn = document.getElementById('scroll-top');
-window.addEventListener('scroll', ()=> {
-  if(window.scrollY > 300) scrollTopBtn.style.display = 'block';
-  else scrollTopBtn.style.display = 'none';
-});
-scrollTopBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-
-// CONTACT: send to Google Apps Script
-(function contact(){
-  const form = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
-  const submitBtn = document.getElementById('submit-btn');
-
-  form.addEventListener('submit', (ev)=>{
-    ev.preventDefault();
-    status.textContent = '';
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-
-    const fd = new FormData(form);
-
-    if(!SCRIPT_URL){
-      // Demo fallback
-      setTimeout(()=>{
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
-        status.textContent = '✅ Demo: message prepared. Add SCRIPT_URL to post to Google Sheets.';
-        form.reset();
-      }, 900);
-      return;
-    }
-
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'cors',
-      body: fd
-    })
-    .then(res => {
-      // Apps Script returns JSON; parse if possible
-      return res.json ? res.json() : res.text();
-    })
-    .then(data => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
-      if(data && data.result === 'success'){
-        status.textContent = '✅ Message sent — thank you!';
-        form.reset();
-      } else {
-        status.textContent = '❌ Submission failed. Try again later.';
-        console.error('Unexpected response from script:', data);
-      }
-    })
-    .catch(err => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
-      status.textContent = '❌ Submission error. Check console.';
-      console.error('Submission error', err);
-    });
-  });
-})();
-
-</script>
+        // GSAP ANIMATIONS
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".skill-card, .project-card").forEach(el => {
+            gsap.from(el, { opacity: 0, y: 50, duration: .6, scrollTrigger: { trigger: el, start: "top 80%" } })
+        });
+    </script>
 </body>
+
 </html>
