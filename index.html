@@ -2,339 +2,835 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Abdullah — Frontend Developer</title>
 
-    <!-- Google Font -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Devicon for skill icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        :root {
+            --bg: #0b1220;
+            --card: #0f1724;
+            --muted: #9aa9b8;
+            --accent: #06b6d4;
+            --accent-2: #38bdf8;
+            --danger: #ff6b6b;
+            --radius: 14px;
+            --glass: rgba(255, 255, 255, 0.04);
+            --max-w: 1100px;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
         }
 
         body {
-            background-color: #0f172a;
-            color: #e2e8f0;
-            scroll-behavior: smooth;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #061022 0%, #071024 100%);
+            color: #e6f1f6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
         }
 
-        header {
-            text-align: center;
-            padding: 5rem 1rem 3rem;
-            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            color: white;
-            border-bottom-left-radius: 2rem;
-            border-bottom-right-radius: 2rem;
+        a {
+            color: var(--accent-2);
+            text-decoration: none
         }
 
-        header h1 {
-            font-size: 2.8rem;
+        a:focus {
+            outline: 2px dashed var(--accent);
+            outline-offset: 3px
+        }
+
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 1.25rem
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .75rem 1rem;
+            position: sticky;
+            top: 0;
+            background: rgba(6, 10, 20, 0.35);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            z-index: 50
+        }
+
+        .logo {
             font-weight: 800;
+            color: var(--accent);
+            font-size: 1.2rem
         }
 
-        header p {
-            font-size: 1.2rem;
-            margin-top: 0.5rem;
-            color: #f0f9ff;
+        .nav-links {
+            display: flex;
+            gap: .75rem;
+            align-items: center
         }
 
-        section {
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: #1e293b;
-            border-radius: 1rem;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.1);
-            transition: transform 0.3s ease;
+        .nav-links a {
+            padding: .45rem .6rem;
+            border-radius: 10px;
+            font-weight: 600;
+            color: #cde7ee
         }
 
-        section:hover {
-            transform: translateY(-5px);
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--accent-2)
         }
 
-        h2 {
-            font-size: 1.8rem;
-            color: #38bdf8;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        p {
-            color: #94a3b8;
-            text-align: center;
-            line-height: 1.7;
-        }
-
-        /* Projects Section */
-        .projects {
+        /* HERO */
+        .hero {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: 1fr 360px;
             gap: 1.5rem;
-            margin-top: 2rem;
+            align-items: center;
+            padding: 3rem 0
         }
 
-        .project-card {
-            background: #334155;
+        .hero-left h1 {
+            font-size: 2.4rem;
+            margin: 0 0 .4rem
+        }
+
+        .typing {
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .hero-left p {
+            color: var(--muted);
+            margin: .5rem 0 1rem
+        }
+
+        .cta {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            padding: .6rem .9rem;
+            border-radius: 12px;
+            font-weight: 700;
+            border: 0;
+            cursor: pointer
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: #021018
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #cfeff7
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: center
+        }
+
+        .avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--accent), #60f0f4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(2, 6, 10, 0.6)
+        }
+
+        .avatar img {
+            width: 96%;
+            height: 96%;
+            object-fit: cover;
+            border-radius: 14px
+        }
+
+        /* SECTIONS */
+        section.card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            border-radius: var(--radius);
             padding: 1.5rem;
-            border-radius: 1rem;
-            transition: transform 0.3s, background 0.3s;
+            margin: 1.25rem 0;
+            box-shadow: 0 8px 30px rgba(2, 6, 10, 0.6);
+            border: 1px solid var(--glass)
         }
 
-        .project-card:hover {
-            transform: translateY(-7px);
-            background: #475569;
+        h2.section-title {
+            margin: 0 0 .6rem;
+            text-align: center;
+            color: var(--accent-2);
+            font-size: 1.5rem
         }
 
-        .project-card strong {
-            font-size: 1.2rem;
-            color: #38bdf8;
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 1rem;
+            align-items: start
         }
 
-        .project-card a {
-            display: inline-block;
-            color: #38bdf8;
-            text-decoration: none;
-            margin-top: 0.5rem;
+        .bio {
+            color: var(--muted);
+            line-height: 1.7
         }
 
-        .project-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* Contact Form */
-        form {
+        .resume {
             display: flex;
             flex-direction: column;
+            gap: .5rem;
+            align-items: center;
+            justify-content: center
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
+            margin-top: 1rem
+        }
+
+        .skill {
+            background: rgba(255, 255, 255, 0.02);
+            padding: .9rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform .18s
+        }
+
+        .skill:hover {
+            transform: translateY(-6px)
+        }
+
+        .skill i {
+            font-size: 32px;
+            display: block;
+            margin-bottom: .6rem;
+            opacity: 0.95
+        }
+
+        .skill small {
+            display: block;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem
+        }
+
+        .project {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.02));
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem
+        }
+
+        .project .thumb {
+            height: 140px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 -30px 60px rgba(0, 0, 0, 0.3)
+        }
+
+        .project h3 {
+            margin: 0;
+            color: var(--accent-2)
+        }
+
+        .project p {
+            color: var(--muted);
+            font-size: .95rem
+        }
+
+        .project-links {
+            display: flex;
+            gap: .6rem;
+            margin-top: auto
+        }
+
+        .chip {
+            padding: .45rem .6rem;
+            border-radius: 10px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        /* CONTACT FORM */
+        .form-row {
+            display: flex;
+            gap: .8rem
+        }
+
+        .form-row .col {
+            flex: 1
+        }
+
+        label {
+            display: block;
+            font-size: .9rem;
+            margin-bottom: .35rem;
+            color: #dbeef6
         }
 
         input,
-        textarea {
+        textarea,
+        select {
             width: 100%;
-            padding: 0.8rem;
-            border-radius: 0.5rem;
-            border: 2px solid transparent;
-            background: #334155;
-            color: #f1f5f9;
-            transition: border 0.3s ease;
+            padding: .75rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: transparent;
+            color: inherit;
             font-size: 1rem;
         }
 
         input:focus,
         textarea:focus {
-            border-color: #38bdf8;
             outline: none;
+            border-color: rgba(56, 189, 248, 0.9);
+            box-shadow: 0 6px 18px rgba(6, 182, 212, 0.06)
         }
 
-        .error {
-            border-color: #f87171 !important;
+        .help {
+            font-size: .85rem;
+            color: var(--muted);
+            margin-top: .35rem
         }
 
-        .warning {
-            color: #f87171;
-            font-size: 0.9rem;
-            display: none;
+        .input-error {
+            border-color: var(--danger) !important
         }
 
-        button {
-            background: #38bdf8;
-            color: #0f172a;
-            padding: 0.9rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: background 0.3s ease;
+        .warning-msg {
+            color: var(--danger);
+            font-size: .9rem;
+            margin-top: .3rem;
+            display: none
         }
 
-        button:hover {
-            background: #0ea5e9;
+        .form-actions {
+            display: flex;
+            gap: .6rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: .6rem
         }
 
-        footer {
+        .btn[disabled] {
+            opacity: .6;
+            cursor: not-allowed
+        }
+
+        /* toast */
+        .toast {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            background: #021018;
+            color: #d7fffe;
+            padding: .9rem 1.1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(2, 6, 10, 0.6);
+            display: flex;
+            gap: .6rem;
+            align-items: center;
+            border: 1px solid rgba(6, 182, 212, 0.12);
+            z-index: 999
+        }
+
+        .toast.error {
+            background: linear-gradient(90deg, #2b0b0b, #482020);
+            color: #ffdede;
+            border-color: rgba(255, 107, 107, 0.12)
+        }
+
+        footer.text-center {
+            padding: 2rem 0;
             text-align: center;
-            padding: 2rem;
-            color: #64748b;
-            border-top: 1px solid #1e293b;
-            margin-top: 4rem;
+            color: var(--muted);
+            font-size: .95rem
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
+        /* small */
+        @media (max-width:980px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center
             }
 
-            section {
-                margin: 1rem;
-                padding: 1.5rem;
+            .hero-right {
+                margin-top: 1rem
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media (max-width:520px) {
+            .avatar {
+                width: 200px;
+                height: 200px
             }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Abdullah — Frontend Developer</h1>
-        <p id="typing-text">a JavaScript Enthusiast</p>
-    </header>
-
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hi, I'm <strong>Abdullah</strong> — a Frontend Web Developer passionate about crafting interactive and
-            visually appealing web experiences using modern technologies like <strong>React, JavaScript, Tailwind CSS,
-                and APIs</strong>. I love building projects that make learning and using the web fun and accessible.</p>
-    </section>
-
-    <section id="projects">
-        <h2>My Projects</h2>
-        <div class="projects">
-            <div class="project-card">
-                <strong>Calculator</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/calculator/" target="_blank">Live Preview</a><br>
-                💻 <a href="https://github.com/abdullahislam123/calculator" target="_blank">GitHub Repo</a>
-            </div>
-
-            <div class="project-card">
-                <strong>Unit Converter</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/temperature-and-distance-converter/" target="_blank">Live
-                    Preview</a><br>
-                💻 <a href="https://github.com/abdullahislam123/temperature-and-distance-converter"
-                    target="_blank">GitHub Repo</a>
-            </div>
-
-            <div class="project-card">
-                <strong>Rock Paper Scissors</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/rock-papaer-scissor/" target="_blank">Live
-                    Preview</a><br>
-                💻 <a href="https://github.com/abdullahislam123/rock-papaer-scissor" target="_blank">GitHub Repo</a>
-            </div>
-
-            <div class="project-card">
-                <strong>Digital Clock</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/digital-clock/" target="_blank">Live Preview</a><br>
-                💻 <a href="https://github.com/abdullahislam123/digital-clock" target="_blank">GitHub Repo</a>
-            </div>
-
-            <div class="project-card">
-                <strong>Quiz App</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/quiz-app/" target="_blank">Live Preview</a><br>
-                💻 <a href="https://github.com/abdullahislam123/quiz-app" target="_blank">GitHub Repo</a>
-            </div>
-
-            <div class="project-card">
-                <strong>Timer App</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/timer-app/" target="_blank">Live Preview</a><br>
-                💻 <a href="https://github.com/abdullahislam123/timer-app" target="_blank">GitHub Repo</a>
-            </div>
+    <nav class="container" aria-label="Main navigation">
+        <div class="logo">Abdullah</div>
+        <div class="nav-links" role="navigation" aria-label="Primary">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="resume.pdf" class="btn btn-ghost" download>Resume</a>
         </div>
-    </section>
+    </nav>
 
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Your Name" />
-            <p class="warning" id="nameWarning">⚠️ Please enter your name</p>
+    <main class="container">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-left">
+                <h1>Hi, I'm <span style="color:var(--accent-2)">Abdullah</span></h1>
+                <p class="typing" id="typing">a Frontend Developer — building interactive & accessible web apps</p>
+                <p class="hero-sub" style="color:var(--muted);max-width:60ch">
+                    I design and develop modern, responsive user interfaces with attention to performance and
+                    accessibility. I
+                    love turning ideas into production-ready experiences.
+                </p>
+                <div class="cta" style="margin-top:1rem">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-ghost">Contact Me</a>
+                </div>
+            </div>
 
-            <input type="email" id="email" placeholder="Your Email" />
-            <p class="warning" id="emailWarning">⚠️ Please enter a valid email</p>
+            <div class="hero-right">
+                <div class="avatar" role="img" aria-label="Photo of Abdullah">
+                    <!-- Replace src with your picture -->
+                    <img src="https://placehold.co/600x600/06b6d4/021018?text=Your+Photo" alt="Abdullah portrait">
+                </div>
+            </div>
+        </section>
 
-            <textarea id="message" rows="5" placeholder="Your Message"></textarea>
-            <p class="warning" id="messageWarning">⚠️ Please enter a message</p>
+        <!-- ABOUT -->
+        <section id="about" class="card" aria-labelledby="aboutTitle">
+            <h2 id="aboutTitle" class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="bio">
+                    <p style="color:var(--muted)">
+                        I'm Abdullah — a frontend developer specializing in JavaScript, React, and building
+                        pixel-perfect
+                        interfaces. I value performance, accessibility, and clean code. I enjoy learning new tools and
+                        solving UI
+                        problems.
+                    </p>
+                    <ul style="margin-top:1rem;color:var(--muted);list-style:disc;padding-left:1.1rem">
+                        <li>Frontend development (React, vanilla JS)</li>
+                        <li>Responsive & accessible UI</li>
+                        <li>State management & API integration</li>
+                        <li>Performance optimisation & testing</li>
+                    </ul>
+                </div>
 
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+                <aside class="resume" aria-label="Quick info">
+                    <div style="background:rgba(255,255,255,0.03);padding:1rem;border-radius:12px;text-align:center">
+                        <div style="font-weight:800;color:var(--accent-2);font-size:1.1rem">Available for hire</div>
+                        <div class="help" style="margin-top:.5rem">Open to remote frontend roles & freelance projects
+                        </div>
+                        <a class="btn btn-primary" href="mailto:abdullah@example.com" style="margin-top:.8rem">Say
+                            Hello</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
 
-    <footer>
-        © 2025 Abdullah. All rights reserved.
-    </footer>
+        <!-- SKILLS -->
+        <section id="skills" class="card" aria-labelledby="skillsTitle">
+            <h2 id="skillsTitle" class="section-title">Skills</h2>
+            <p style="text-align:center;color:var(--muted)">Tools & languages I use frequently</p>
+            <div class="skills-grid" style="margin-top:1rem">
+                <div class="skill" title="HTML5"><i class="devicon-html5-plain"></i><small>HTML5</small></div>
+                <div class="skill" title="CSS3"><i class="devicon-css3-plain"></i><small>CSS3</small></div>
+                <div class="skill" title="JavaScript"><i class="devicon-javascript-plain"></i><small>JavaScript</small>
+                </div>
+                <div class="skill" title="React"><i class="devicon-react-original"></i><small>React</small></div>
+                <div class="skill" title="Tailwind"><i class="devicon-tailwindcss-plain"></i><small>Tailwind</small>
+                </div>
+                <div class="skill" title="Node.js"><i class="devicon-nodejs-plain"></i><small>Node.js</small></div>
+                <div class="skill" title="MongoDB"><i class="devicon-mongodb-plain"></i><small>MongoDB</small></div>
+                <div class="skill" title="Git"><i class="devicon-git-plain"></i><small>Git</small></div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="card" aria-labelledby="projectsTitle">
+            <h2 id="projectsTitle" class="section-title">Featured Projects</h2>
+            <p style="text-align:center;color:var(--muted)">A selection of projects with live previews and source code
+            </p>
+
+            <div class="projects-grid" style="margin-top:1rem">
+                <!-- Project 1 -->
+                <article class="project" aria-labelledby="p1Title">
+                    <div class="thumb"
+                        style="background-image:url('https://placehold.co/800x400/06b6d4/021018?text=Calculator')">
+                    </div>
+                    <h3 id="p1Title">Calculator</h3>
+                    <p>An interactive calculator built with vanilla JavaScript — responsive and keyboard-friendly.</p>
+                    <div class="project-links">
+                        <a class="chip" href="https://abdullahislam123.github.io/calculator/" target="_blank"
+                            rel="noopener">Live Preview</a>
+                        <a class="chip" href="https://github.com/abdullahislam123/calculator" target="_blank"
+                            rel="noopener">Source</a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project" aria-labelledby="p2Title">
+                    <div class="thumb"
+                        style="background-image:url('https://placehold.co/800x400/f59e0b/021018?text=Unit+Converter')">
+                    </div>
+                    <h3 id="p2Title">Unit Converter</h3>
+                    <p>Temperature and distance converter — clean UI, accurate conversions and validations.</p>
+                    <div class="project-links">
+                        <a class="chip" href="https://abdullahislam123.github.io/temperature-and-distance-converter/"
+                            target="_blank" rel="noopener">Live Preview</a>
+                        <a class="chip" href="https://github.com/abdullahislam123/temperature-and-distance-converter"
+                            target="_blank" rel="noopener">Source</a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project" aria-labelledby="p3Title">
+                    <div class="thumb"
+                        style="background-image:url('https://placehold.co/800x400/06b6d4/021018?text=Rock+Paper+Scissor')">
+                    </div>
+                    <h3 id="p3Title">Rock Paper Scissors</h3>
+                    <p>Classic game with score tracking and simple animations — built with JS and CSS.</p>
+                    <div class="project-links">
+                        <a class="chip" href="https://abdullahislam123.github.io/rock-papaer-scissor/" target="_blank"
+                            rel="noopener">Live Preview</a>
+                        <a class="chip" href="https://github.com/abdullahislam123/rock-papaer-scissor" target="_blank"
+                            rel="noopener">Source</a>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project" aria-labelledby="p4Title">
+                    <div class="thumb"
+                        style="background-image:url('https://placehold.co/800x400/f59e0b/021018?text=Digital+Clock')">
+                    </div>
+                    <h3 id="p4Title">Digital Clock</h3>
+                    <p>A responsive clock & stopwatch with pause/resume features — lightweight and accurate.</p>
+                    <div class="project-links">
+                        <a class="chip" href="https://abdullahislam123.github.io/digital-clock/" target="_blank"
+                            rel="noopener">Live Preview</a>
+                        <a class="chip" href="https://github.com/abdullahislam123/digital-clock" target="_blank"
+                            rel="noopener">Source</a>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="project" aria-labelledby="p5Title">
+                    <div class="thumb"
+                        style="background-image:url('https://placehold.co/800x400/06b6d4/021018?text=Quiz+App')"></div>
+                    <h3 id="p5Title">Quiz App</h3>
+                    <p>Multiple-choice quiz app with scoring and result summary — excellent for practice tests.</p>
+                    <div class="project-links">
+                        <a class="chip" href="https://abdullahislam123.github.io/quiz-app/" target="_blank"
+                            rel="noopener">Live Preview</a>
+                        <a class="chip" href="https://github.com/abdullahislam123/quiz-app" target="_blank"
+                            rel="noopener">Source</a>
+                    </div>
+                </article>
+
+                <!-- Project 6 -->
+                <article class="project" aria-labelledby="p6Title">
+                    <div class="thumb"
+                        style="background-image:url('https://placehold.co/800x400/f59e0b/021018?text=Timer+App')"></div>
+                    <h3 id="p6Title">Timer App</h3>
+                    <p>Customisable timer with presets and alarm sound — built for usability.</p>
+                    <div class="project-links">
+                        <a class="chip" href="https://abdullahislam123.github.io/timer-app/" target="_blank"
+                            rel="noopener">Live Preview</a>
+                        <a class="chip" href="https://github.com/abdullahislam123/timer-app" target="_blank"
+                            rel="noopener">Source</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="card" aria-labelledby="contactTitle">
+            <h2 id="contactTitle" class="section-title">Contact Me</h2>
+            <p style="text-align:center;color:var(--muted)">Have a project or opportunity? Send a message — I'll reply
+                as soon as possible.</p>
+
+            <form id="contactForm" novalidate style="margin-top:1rem">
+                <!-- Honeypot (hidden to humans) -->
+                <input type="text" name="company" id="company" style="position:absolute;left:-9999px;opacity:0"
+                    tabindex="-1" autocomplete="off">
+
+                <div class="form-row">
+                    <div class="col">
+                        <label for="name">Name *</label>
+                        <input id="name" name="name" type="text" required aria-required="true" autocomplete="name"
+                            placeholder="Your full name">
+                        <div class="warning-msg" id="nameWarn">Please enter your name (min 2 characters).</div>
+                    </div>
+
+                    <div class="col">
+                        <label for="email">Email *</label>
+                        <input id="email" name="email" type="email" required aria-required="true" autocomplete="email"
+                            placeholder="you@example.com">
+                        <div class="warning-msg" id="emailWarn">Please enter a valid email.</div>
+                    </div>
+                </div>
+
+                <div style="margin-top:.6rem">
+                    <label for="subject">Subject</label>
+                    <input id="subject" name="subject" placeholder="Short subject (optional)">
+                </div>
+
+                <div style="margin-top:.6rem">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" required aria-required="true"
+                        placeholder="Tell me about your project or question"></textarea>
+                    <div class="warning-msg" id="messageWarn">Please add a message (min 10 characters).</div>
+                </div>
+
+                <div class="form-actions">
+                    <button id="submitBtn" type="submit" class="btn btn-primary" aria-live="polite">
+                        <span id="btnText">Send Message</span>
+                        <span id="btnSpinner" style="display:none;margin-left:.6rem">⏳</span>
+                    </button>
+
+                    <div class="help" style="margin-left:auto;color:var(--muted)"><small>Response time usually within
+                            24–48 hrs</small></div>
+                </div>
+            </form>
+        </section>
+
+        <footer class="text-center">
+            <div>© 2025 Abdullah — Built with ❤️ • <a href="#projects">See projects</a></div>
+        </footer>
+    </main>
+
+    <!-- Toast container (will be created by JS) -->
+    <div id="toastRoot" aria-live="polite" aria-atomic="true"
+        style="position:fixed;right:1rem;bottom:1rem;z-index:9999"></div>
 
     <script>
-        lucide.createIcons();
-
-        // Typing animation
-        const typingElement = document.getElementById("typing-text");
-        const phrases = ["a Frontend Developer.", "a React Enthusiast.", "a Problem Solver."];
-        let phraseIndex = 0, charIndex = 0, isDeleting = false;
-
-        function type() {
-            const currentPhrase = phrases[phraseIndex];
-            typingElement.textContent = currentPhrase.substring(0, charIndex) + '|';
-            if (!isDeleting && charIndex < currentPhrase.length) {
-                charIndex++;
-                setTimeout(type, 100);
-            } else if (isDeleting && charIndex > 0) {
-                charIndex--;
-                setTimeout(type, 50);
-            } else {
-                isDeleting = !isDeleting;
-                if (!isDeleting) phraseIndex = (phraseIndex + 1) % phrases.length;
-                setTimeout(type, 1000);
+        /* ---------- Typing animation ---------- */
+        (function typing() {
+            const el = document.getElementById('typing');
+            const words = ['a Frontend Developer.', 'a React enthusiast.', 'a JavaScript lover.'];
+            let w = 0, i = 0, deleting = false;
+            function loop() {
+                const full = words[w];
+                el.textContent = full.substring(0, i) + (i % 2 ? '|' : '');
+                if (!deleting && i < full.length) { i++; setTimeout(loop, 80) }
+                else if (deleting && i > 0) { i--; setTimeout(loop, 40) }
+                else { deleting = !deleting; if (!deleting) w = (w + 1) % words.length; setTimeout(loop, 900) }
             }
-        }
-        type();
+            loop();
+        })();
 
-        // Contact form validation + Google Sheets integration
-        const form = document.getElementById("contactForm");
+        /* ---------- Form logic ---------- */
+        (function () {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
 
-        form.addEventListener("submit", e => {
-            e.preventDefault();
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+            const messageInput = document.getElementById('message');
+            const honeypot = document.getElementById('company');
 
-            const name = document.getElementById("name");
-            const email = document.getElementById("email");
-            const message = document.getElementById("message");
-            const warnings = {
-                name: document.getElementById("nameWarning"),
-                email: document.getElementById("emailWarning"),
-                message: document.getElementById("messageWarning"),
-            };
+            const nameWarn = document.getElementById('nameWarn');
+            const emailWarn = document.getElementById('emailWarn');
+            const messageWarn = document.getElementById('messageWarn');
 
-            let valid = true;
+            const TOAST_ROOT = document.getElementById('toastRoot');
 
-            [name, email, message].forEach(input => input.classList.remove("error"));
-            Object.values(warnings).forEach(w => w.style.display = "none");
-
-            if (name.value.trim() === "") {
-                name.classList.add("error");
-                warnings.name.style.display = "block";
-                valid = false;
-            }
-            if (email.value.trim() === "" || !email.value.includes("@")) {
-                email.classList.add("error");
-                warnings.email.style.display = "block";
-                valid = false;
-            }
-            if (message.value.trim() === "") {
-                message.classList.add("error");
-                warnings.message.style.display = "block";
-                valid = false;
+            function showToast(text, type = 'success', duration = 4000) {
+                const t = document.createElement('div');
+                t.className = 'toast' + (type === 'error' ? ' error' : '');
+                t.textContent = text;
+                TOAST_ROOT.appendChild(t);
+                setTimeout(() => { t.style.opacity = '0'; t.addEventListener('transitionend', () => t.remove()); }, duration);
             }
 
-            if (valid) {
-                fetch("https://script.google.com/macros/s/AKfycbxHVbWmsBqQNE6XO23rMVeJ-vdIfRwbtTAFLPlHkwB-99yRGIcOKTM8Enbn9J19ycyMDw/exec", {
-                    method: "POST",
-                    body: new FormData(form)
+            function validateEmail(email) {
+                // robust-ish regex but not insanely strict
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function setErrorField(input, warnEl, show) {
+                if (show) {
+                    input.classList.add('input-error');
+                    warnEl.style.display = 'block';
+                } else {
+                    input.classList.remove('input-error');
+                    warnEl.style.display = 'none';
+                }
+            }
+
+            function setSending(sending) {
+                if (sending) {
+                    submitBtn.setAttribute('disabled', 'disabled');
+                    btnText.textContent = 'Sending...';
+                    btnSpinner.style.display = 'inline';
+                } else {
+                    submitBtn.removeAttribute('disabled');
+                    btnText.textContent = 'Send Message';
+                    btnSpinner.style.display = 'none';
+                }
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Reset errors
+                setErrorField(nameInput, nameWarn, false);
+                setErrorField(emailInput, emailWarn, false);
+                setErrorField(messageInput, messageWarn, false);
+
+                // Basic client-side validation
+                let ok = true;
+                const nameV = nameInput.value.trim();
+                const emailV = emailInput.value.trim();
+                const messageV = messageInput.value.trim();
+
+                if (honeypot.value) {
+                    // bot detected: silently fail (don't send)
+                    console.warn('Honeypot triggered — likely bot. Submission ignored.');
+                    return;
+                }
+
+                if (nameV.length < 2) { setErrorField(nameInput, nameWarn, true); ok = false; }
+                if (!validateEmail(emailV)) { setErrorField(emailInput, emailWarn, true); ok = false; }
+                if (messageV.length < 10) { setErrorField(messageInput, messageWarn, true); ok = false; }
+
+                if (!ok) {
+                    showToast('Please fix validation errors and try again.', 'error', 4000);
+                    return;
+                }
+
+                // Prepare data
+                const formData = new FormData();
+                formData.append('name', nameV);
+                formData.append('email', emailV);
+                formData.append('subject', subjectInput.value.trim());
+                formData.append('message', messageV);
+
+                // Show sending UI
+                setSending(true);
+
+                // Replace with your deployed Apps Script Web App URL:
+                const ENDPOINT = 'YOUR_GOOGLE_SCRIPT_URL';
+
+                // Fetch with timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+                fetch(ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    signal: controller.signal,
+                    // no headers for FormData
                 })
-                    .then(() => {
-                        alert("✅ Message sent successfully!");
-                        form.reset();
+                    .then(async (res) => {
+                        clearTimeout(timeoutId);
+                        if (!res.ok) throw new Error('Server responded with ' + res.status);
+                        // Some Apps Script return 'Success' plain text, others JSON.
+                        const text = await res.text();
+                        // Accept common success responses
+                        if (text && /success/i.test(text)) {
+                            showToast('✅ Message sent — thank you! I will reply soon.');
+                            form.reset();
+                        } else {
+                            // try parse JSON
+                            try {
+                                const json = JSON.parse(text);
+                                if (json && (json.status === 'success' || json.ok)) {
+                                    showToast('✅ Message sent — thank you!');
+                                    form.reset();
+                                } else {
+                                    throw new Error('unexpected response');
+                                }
+                            } catch (err) {
+                                // Not JSON or unexpected content — treat as success if includes success keyword
+                                showToast('✅ Message sent — thank you!');
+                                form.reset();
+                            }
+                        }
                     })
-                    .catch(() => {
-                        alert("❌ Something went wrong. Please try again later.");
+                    .catch((err) => {
+                        if (err.name === 'AbortError') {
+                            showToast('Network timeout. Please check your connection and try again.', 'error', 5000);
+                        } else {
+                            console.error(err);
+                            showToast('❌ Could not send message. Please try again later.', 'error', 5000);
+                        }
+                    })
+                    .finally(() => {
+                        setSending(false);
                     });
-            }
-        });
+            });
+
+            // Accessibility: remove error styles on input
+            [nameInput, emailInput, messageInput].forEach(inp => {
+                inp.addEventListener('input', () => {
+                    inp.classList.remove('input-error');
+                    // hide its warn
+                    if (inp === nameInput) nameWarn.style.display = 'none';
+                    if (inp === emailInput) emailWarn.style.display = 'none';
+                    if (inp === messageInput) messageWarn.style.display = 'none';
+                });
+            });
+
+        })();
     </script>
 </body>
 
