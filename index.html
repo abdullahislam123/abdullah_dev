@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdullah — Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdullah — Frontend Developer</title>
 
-    <!-- Google Fonts -->
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons -->
@@ -23,57 +23,89 @@
         body {
             background-color: #0f172a;
             color: #e2e8f0;
-            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         header {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 5rem 1rem 3rem;
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: white;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
         }
 
-        h1 {
-            font-size: 2.5rem;
+        header h1 {
+            font-size: 2.8rem;
             font-weight: 800;
-            color: #38bdf8;
         }
 
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #38bdf8;
-        }
-
-        p {
-            color: #94a3b8;
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            color: #f0f9ff;
         }
 
         section {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 3rem auto;
             padding: 2rem;
             background: #1e293b;
             border-radius: 1rem;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.1);
+            transition: transform 0.3s ease;
         }
 
-        /* Projects */
-        ul {
-            list-style: none;
+        section:hover {
+            transform: translateY(-5px);
         }
 
-        li {
-            margin: 1rem 0;
-            padding: 1rem;
+        h2 {
+            font-size: 1.8rem;
+            color: #38bdf8;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        p {
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* Projects Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
             background: #334155;
-            border-radius: 0.8rem;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: transform 0.3s, background 0.3s;
         }
 
-        a {
+        .project-card:hover {
+            transform: translateY(-7px);
+            background: #475569;
+        }
+
+        .project-card strong {
+            font-size: 1.2rem;
+            color: #38bdf8;
+        }
+
+        .project-card a {
+            display: inline-block;
             color: #38bdf8;
             text-decoration: none;
+            margin-top: 0.5rem;
         }
 
-        a:hover {
+        .project-card a:hover {
             text-decoration: underline;
         }
 
@@ -82,6 +114,8 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         input,
@@ -93,6 +127,7 @@
             background: #334155;
             color: #f1f5f9;
             transition: border 0.3s ease;
+            font-size: 1rem;
         }
 
         input:focus,
@@ -113,13 +148,13 @@
 
         button {
             background: #38bdf8;
-            border: none;
             color: #0f172a;
-            padding: 0.8rem;
+            padding: 0.9rem;
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            border: none;
+            transition: background 0.3s ease;
         }
 
         button:hover {
@@ -130,10 +165,13 @@
             text-align: center;
             padding: 2rem;
             color: #64748b;
+            border-top: 1px solid #1e293b;
+            margin-top: 4rem;
         }
 
+        /* Responsive */
         @media (max-width: 600px) {
-            h1 {
+            header h1 {
                 font-size: 2rem;
             }
 
@@ -147,66 +185,71 @@
 
 <body>
     <header>
-        <h1>Abdullah — Portfolio</h1>
-        <p id="typing-text">a Frontend Developer</p>
+        <h1>Abdullah — Frontend Developer</h1>
+        <p id="typing-text">a JavaScript Enthusiast</p>
     </header>
 
-    <section>
+    <section id="about">
         <h2>About Me</h2>
-        <p>I'm Abdullah, a passionate web developer focused on creating modern, responsive, and interactive websites using React, Tailwind, and JavaScript.</p>
+        <p>Hi, I'm <strong>Abdullah</strong> — a Frontend Web Developer passionate about crafting interactive and
+            visually appealing web experiences using modern technologies like <strong>React, JavaScript, Tailwind CSS,
+                and APIs</strong>. I love building projects that make learning and using the web fun and accessible.</p>
     </section>
 
-    <section>
-        <h2>Projects</h2>
-        <ul>
-            <li>
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="projects">
+            <div class="project-card">
                 <strong>Calculator</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/calculator/" target="_blank">Live Preview</a> |
+                🔗 <a href="https://abdullahislam123.github.io/calculator/" target="_blank">Live Preview</a><br>
                 💻 <a href="https://github.com/abdullahislam123/calculator" target="_blank">GitHub Repo</a>
-            </li>
+            </div>
 
-            <li>
+            <div class="project-card">
                 <strong>Unit Converter</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/temperature-and-distance-converter/" target="_blank">Live Preview</a> |
-                💻 <a href="https://github.com/abdullahislam123/temperature-and-distance-converter" target="_blank">GitHub Repo</a>
-            </li>
+                🔗 <a href="https://abdullahislam123.github.io/temperature-and-distance-converter/" target="_blank">Live
+                    Preview</a><br>
+                💻 <a href="https://github.com/abdullahislam123/temperature-and-distance-converter"
+                    target="_blank">GitHub Repo</a>
+            </div>
 
-            <li>
+            <div class="project-card">
                 <strong>Rock Paper Scissors</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/rock-papaer-scissor/" target="_blank">Live Preview</a> |
+                🔗 <a href="https://abdullahislam123.github.io/rock-papaer-scissor/" target="_blank">Live
+                    Preview</a><br>
                 💻 <a href="https://github.com/abdullahislam123/rock-papaer-scissor" target="_blank">GitHub Repo</a>
-            </li>
+            </div>
 
-            <li>
+            <div class="project-card">
                 <strong>Digital Clock</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/digital-clock/" target="_blank">Live Preview</a> |
+                🔗 <a href="https://abdullahislam123.github.io/digital-clock/" target="_blank">Live Preview</a><br>
                 💻 <a href="https://github.com/abdullahislam123/digital-clock" target="_blank">GitHub Repo</a>
-            </li>
+            </div>
 
-            <li>
+            <div class="project-card">
                 <strong>Quiz App</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/quiz-app/" target="_blank">Live Preview</a> |
+                🔗 <a href="https://abdullahislam123.github.io/quiz-app/" target="_blank">Live Preview</a><br>
                 💻 <a href="https://github.com/abdullahislam123/quiz-app" target="_blank">GitHub Repo</a>
-            </li>
+            </div>
 
-            <li>
+            <div class="project-card">
                 <strong>Timer App</strong><br>
-                🔗 <a href="https://abdullahislam123.github.io/timer-app/" target="_blank">Live Preview</a> |
+                🔗 <a href="https://abdullahislam123.github.io/timer-app/" target="_blank">Live Preview</a><br>
                 💻 <a href="https://github.com/abdullahislam123/timer-app" target="_blank">GitHub Repo</a>
-            </li>
-        </ul>
+            </div>
+        </div>
     </section>
 
     <section id="contact">
         <h2>Contact Me</h2>
         <form id="contactForm">
-            <input type="text" id="name" placeholder="Your Name">
+            <input type="text" id="name" placeholder="Your Name" />
             <p class="warning" id="nameWarning">⚠️ Please enter your name</p>
 
-            <input type="email" id="email" placeholder="Your Email">
+            <input type="email" id="email" placeholder="Your Email" />
             <p class="warning" id="emailWarning">⚠️ Please enter a valid email</p>
 
-            <textarea id="message" placeholder="Your Message" rows="5"></textarea>
+            <textarea id="message" rows="5" placeholder="Your Message"></textarea>
             <p class="warning" id="messageWarning">⚠️ Please enter a message</p>
 
             <button type="submit">Send Message</button>
@@ -221,14 +264,13 @@
         lucide.createIcons();
 
         // Typing animation
-        const typingElement = document.getElementById('typing-text');
-        const phrases = ["a Full Stack Developer.", "a Frontend Specialist.", "a Problem Solver."];
+        const typingElement = document.getElementById("typing-text");
+        const phrases = ["a Frontend Developer.", "a React Enthusiast.", "a Problem Solver."];
         let phraseIndex = 0, charIndex = 0, isDeleting = false;
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
             typingElement.textContent = currentPhrase.substring(0, charIndex) + '|';
-
             if (!isDeleting && charIndex < currentPhrase.length) {
                 charIndex++;
                 setTimeout(type, 100);
@@ -243,45 +285,54 @@
         }
         type();
 
-        // Contact form validation
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
+        // Contact form validation + Google Sheets integration
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", e => {
             e.preventDefault();
 
-            const name = document.getElementById('name');
-            const email = document.getElementById('email');
-            const message = document.getElementById('message');
-
-            const nameWarning = document.getElementById('nameWarning');
-            const emailWarning = document.getElementById('emailWarning');
-            const messageWarning = document.getElementById('messageWarning');
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const message = document.getElementById("message");
+            const warnings = {
+                name: document.getElementById("nameWarning"),
+                email: document.getElementById("emailWarning"),
+                message: document.getElementById("messageWarning"),
+            };
 
             let valid = true;
 
-            // Reset warnings
-            [name, email, message].forEach(input => input.classList.remove('error'));
-            [nameWarning, emailWarning, messageWarning].forEach(w => w.style.display = 'none');
+            [name, email, message].forEach(input => input.classList.remove("error"));
+            Object.values(warnings).forEach(w => w.style.display = "none");
 
-            if (name.value.trim() === '') {
-                name.classList.add('error');
-                nameWarning.style.display = 'block';
+            if (name.value.trim() === "") {
+                name.classList.add("error");
+                warnings.name.style.display = "block";
                 valid = false;
             }
-
-            if (email.value.trim() === '' || !email.value.includes('@')) {
-                email.classList.add('error');
-                emailWarning.style.display = 'block';
+            if (email.value.trim() === "" || !email.value.includes("@")) {
+                email.classList.add("error");
+                warnings.email.style.display = "block";
                 valid = false;
             }
-
-            if (message.value.trim() === '') {
-                message.classList.add('error');
-                messageWarning.style.display = 'block';
+            if (message.value.trim() === "") {
+                message.classList.add("error");
+                warnings.message.style.display = "block";
                 valid = false;
             }
 
             if (valid) {
-                alert("✅ Message sent successfully!");
-                this.reset();
+                fetch("https://script.google.com/macros/s/AKfycbxHVbWmsBqQNE6XO23rMVeJ-vdIfRwbtTAFLPlHkwB-99yRGIcOKTM8Enbn9J19ycyMDw/exec", {
+                    method: "POST",
+                    body: new FormData(form)
+                })
+                    .then(() => {
+                        alert("✅ Message sent successfully!");
+                        form.reset();
+                    })
+                    .catch(() => {
+                        alert("❌ Something went wrong. Please try again later.");
+                    });
             }
         });
     </script>
