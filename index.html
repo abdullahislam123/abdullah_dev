@@ -494,7 +494,7 @@
         const status = document.getElementById('form-status');
         form.addEventListener('submit', e => {
             e.preventDefault();
-            fetch('https://script.google.com/macros/s/AKfycbxGBacOKb2rMtrwi0oZCX-o3g25wEM7IptYZTmD7irceBHRGlTj3e2sg5bTL7Snlqcnhw/exec', { method: 'POST', body: new FormData(form) })
+            fetch('https://script.google.com/macros/s/AKfycbxHVbWmsBqQNE6XO23rMVeJ-vdIfRwbtTAFLPlHkwB-99yRGIcOKTM8Enbn9J19ycyMDw/exec', { method: 'POST', body: new FormData(form) })
                 .then(() => { status.textContent = 'Message sent successfully!'; form.reset(); })
                 .catch(() => { status.textContent = 'Error sending message.'; });
         });
