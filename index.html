@@ -9,500 +9,280 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <!-- Devicons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide/dist/lucide.min.js"></script>
-
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        :root {
-            --accent1: #06b6d4;
-            --accent2: #f59e0b;
-            --radius: 14px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
             line-height: 1.6;
-            transition: background .5s, color .5s;
-            background-color: #0f1724;
-            color: #e6f1f6;
         }
 
-        body[data-theme="light"] {
-            background: #f7f9fb;
-            color: #061122;
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #38bdf8;
+        }
+
+        p {
+            color: #94a3b8;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: #1e293b;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+        }
+
+        /* Projects */
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #334155;
+            border-radius: 0.8rem;
         }
 
         a {
+            color: #38bdf8;
             text-decoration: none;
-            color: inherit
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 1.5rem
+        a:hover {
+            text-decoration: underline;
         }
 
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(255, 255, 255, .05);
-            backdrop-filter: blur(10px);
+        /* Contact Form */
+        form {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: .8rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, .1)
-        }
-
-        .logo {
-            font-weight: 800;
-            color: var(--accent1);
-            font-size: 1.4rem
-        }
-
-        .nav-links {
-            display: flex;
+            flex-direction: column;
             gap: 1rem;
-            list-style: none
         }
 
-        .nav-links a {
-            position: relative;
-            font-weight: 500
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent1);
-            transition: .3s
-        }
-
-        .nav-links a:hover::after {
-            width: 100%
-        }
-
-        .theme-toggle {
-            background: none;
-            border: 0;
-            cursor: pointer;
-            color: inherit
-        }
-
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 2rem;
-            align-items: center;
-            padding: 5rem 1.5rem
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: .3rem
-        }
-
-        .hero p {
-            max-width: 500px
-        }
-
-        .hero img {
+        input,
+        textarea {
             width: 100%;
-            border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .5)
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            border: 2px solid transparent;
+            background: #334155;
+            color: #f1f5f9;
+            transition: border 0.3s ease;
         }
 
-        .typing {
-            color: var(--accent2);
-            font-weight: 700
+        input:focus,
+        textarea:focus {
+            border-color: #38bdf8;
+            outline: none;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: .7rem 1rem;
-            border-radius: var(--radius);
+        .error {
+            border-color: #f87171 !important;
+        }
+
+        .warning {
+            color: #f87171;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        button {
+            background: #38bdf8;
+            border: none;
+            color: #0f172a;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
             font-weight: 600;
-            gap: .5rem;
             cursor: pointer;
-            transition: .3s
+            transition: background 0.3s;
         }
 
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent1), #3dd5d0);
-            color: #021018;
-            box-shadow: 0 4px 10px rgba(6, 182, 212, .4)
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px)
-        }
-
-        .btn-secondary {
-            border: 1px solid rgba(255, 255, 255, .2)
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            text-align: center;
-            margin: 2.5rem 0 1.2rem;
-            position: relative
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: var(--accent1);
-            margin: .5rem auto;
-            border-radius: 999px
-        }
-
-        .skills-grid,
-        .projects-grid {
-            display: grid;
-            gap: 1.2rem
-        }
-
-        .skills-grid {
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, .05);
-            padding: 1.2rem;
-            border-radius: var(--radius);
-            text-align: center;
-            transition: .3s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, .08)
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px) scale(1.02)
-        }
-
-        .skill-card i {
-            font-size: 48px;
-            margin-bottom: .5rem
-        }
-
-        .projects-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, .05);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: .4s;
-            backdrop-filter: blur(10px)
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: .4s
-        }
-
-        .project-info {
-            padding: 1rem
-        }
-
-        .project-card:hover img {
-            filter: brightness(.8)
-        }
-
-        .project-links {
-            display: flex;
-            gap: .6rem;
-            margin-top: .6rem
-        }
-
-        .project-links a {
-            flex: 1;
-            text-align: center;
-            padding: .5rem 0;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-
-        .project-links .live {
-            background: linear-gradient(90deg, var(--accent1), #3dd5d0);
-            color: #021018
-        }
-
-        .project-links .code {
-            border: 1px solid rgba(255, 255, 255, .3)
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: .7rem;
-            margin-bottom: .6rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, .2);
-            background: transparent;
-            color: inherit
+        button:hover {
+            background: #0ea5e9;
         }
 
         footer {
             text-align: center;
-            padding: 2rem 1rem;
-            border-top: 1px solid rgba(255, 255, 255, .05)
+            padding: 2rem;
+            color: #64748b;
         }
 
-        footer a {
-            margin: 0 .5rem
-        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
 
-        .scroll-top {
-            position: fixed;
-            right: 1.2rem;
-            bottom: 1.2rem;
-            padding: .6rem;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--accent1), var(--accent2));
-            color: #021018;
-            border: 0;
-            display: none;
-            cursor: pointer
-        }
-
-        .scroll-top.show {
-            display: block
-        }
-
-        @media(max-width:800px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center
+            section {
+                margin: 1rem;
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a href="#" class="logo">Abdullah</a>
-        <ul class="nav-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+    <header>
+        <h1>Abdullah — Portfolio</h1>
+        <p id="typing-text">a Frontend Developer</p>
+    </header>
+
+    <section>
+        <h2>About Me</h2>
+        <p>I'm Abdullah, a passionate web developer focused on creating modern, responsive, and interactive websites using React, Tailwind, and JavaScript.</p>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <ul>
+            <li>
+                <strong>Calculator</strong><br>
+                🔗 <a href="https://abdullahislam123.github.io/calculator/" target="_blank">Live Preview</a> |
+                💻 <a href="https://github.com/abdullahislam123/calculator" target="_blank">GitHub Repo</a>
+            </li>
+
+            <li>
+                <strong>Unit Converter</strong><br>
+                🔗 <a href="https://abdullahislam123.github.io/temperature-and-distance-converter/" target="_blank">Live Preview</a> |
+                💻 <a href="https://github.com/abdullahislam123/temperature-and-distance-converter" target="_blank">GitHub Repo</a>
+            </li>
+
+            <li>
+                <strong>Rock Paper Scissors</strong><br>
+                🔗 <a href="https://abdullahislam123.github.io/rock-papaer-scissor/" target="_blank">Live Preview</a> |
+                💻 <a href="https://github.com/abdullahislam123/rock-papaer-scissor" target="_blank">GitHub Repo</a>
+            </li>
+
+            <li>
+                <strong>Digital Clock</strong><br>
+                🔗 <a href="https://abdullahislam123.github.io/digital-clock/" target="_blank">Live Preview</a> |
+                💻 <a href="https://github.com/abdullahislam123/digital-clock" target="_blank">GitHub Repo</a>
+            </li>
+
+            <li>
+                <strong>Quiz App</strong><br>
+                🔗 <a href="https://abdullahislam123.github.io/quiz-app/" target="_blank">Live Preview</a> |
+                💻 <a href="https://github.com/abdullahislam123/quiz-app" target="_blank">GitHub Repo</a>
+            </li>
+
+            <li>
+                <strong>Timer App</strong><br>
+                🔗 <a href="https://abdullahislam123.github.io/timer-app/" target="_blank">Live Preview</a> |
+                💻 <a href="https://github.com/abdullahislam123/timer-app" target="_blank">GitHub Repo</a>
+            </li>
         </ul>
-        <button class="theme-toggle" id="theme-toggle"><i data-lucide="moon"></i></button>
-    </nav>
-
-    <section class="hero" id="hero">
-        <div>
-            <h1>Hi, I'm Abdullah 👋</h1>
-            <p>I'm <span class="typing" id="typing-text">a Full Stack Developer.</span></p>
-            <p>I design and develop engaging, responsive, and user-friendly web applications.</p>
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-secondary">Contact Me</a>
-        </div>
-        <img src="images/my_pic.jpg" alt="Abdullah portrait">
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title">Technical Expertise</h2>
-        <div class="container skills-grid">
-            <div class="skill-card"><i class="devicon-html5-plain colored"></i>
-                <h4>HTML5</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-css3-plain colored"></i>
-                <h4>CSS3</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-javascript-plain colored"></i>
-                <h4>JavaScript</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-react-original colored"></i>
-                <h4>React</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-nodejs-plain colored"></i>
-                <h4>Node.js</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-mongodb-plain colored"></i>
-                <h4>MongoDB</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-mysql-plain colored"></i>
-                <h4>MySQL</h4>
-            </div>
-            <div class="skill-card"><i class="devicon-git-plain colored"></i>
-                <h4>Git & Version Control</h4>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="container projects-grid">
-            <!-- Repeat structure for all projects -->
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/06b6d4/021018?text=Calculator" alt="Calculator Project">
-                <div class="project-info">
-                    <h3>Calculator</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/calculator/" target="_blank">Live
-                            Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/calculator" target="_blank">Source
-                            Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/f59e0b/021018?text=Unit+Converter">
-                <div class="project-info">
-                    <h3>Unit Converter</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/temperature-and-distance-converter/"
-                            target="_blank">Live Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/temperature-and-distance-converter"
-                            target="_blank">Source Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/06b6d4/021018?text=Rock+Paper+Scissor">
-                <div class="project-info">
-                    <h3>Rock Paper Scissor</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/rock-papaer-scissor/"
-                            target="_blank">Live Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/rock-papaer-scissor"
-                            target="_blank">Source Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/f59e0b/021018?text=Stopwatch">
-                <div class="project-info">
-                    <h3>Stopwatch</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/Stopwatch/" target="_blank">Live
-                            Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/Stopwatch" target="_blank">Source
-                            Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/06b6d4/021018?text=Expense+Tracker">
-                <div class="project-info">
-                    <h3>Daily Expense Tracker</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/expense-tracker/" target="_blank">Live
-                            Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/smart-expense-manager"
-                            target="_blank">Source Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/f59e0b/021018?text=Twitter+Clone">
-                <div class="project-info">
-                    <h3>Twitter Clone</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/twitter-clone/" target="_blank">Live
-                            Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/twitter-clone" target="_blank">Source
-                            Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://placehold.co/600x300/06b6d4/021018?text=Portfolio">
-                <div class="project-info">
-                    <h3>Portfolio</h3>
-                    <div class="project-links">
-                        <a class="live" href="https://abdullahislam123.github.io/abdullah_dev/" target="_blank">Live
-                            Preview</a>
-                        <a class="code" href="https://github.com/abdullahislam123/abdullah_dev" target="_blank">Source
-                            Code</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="container">
-            <form class="card contact-form" id="contact-form" name="contact-form">
-                <input name="name" placeholder="Your Name" required>
-                <input name="email" type="email" placeholder="Your Email" required>
-                <textarea name="message" rows="4" placeholder="Message..." required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-                <div id="form-status" style="margin-top:.5rem;font-size:.9rem"></div>
-            </form>
-        </div>
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name">
+            <p class="warning" id="nameWarning">⚠️ Please enter your name</p>
+
+            <input type="email" id="email" placeholder="Your Email">
+            <p class="warning" id="emailWarning">⚠️ Please enter a valid email</p>
+
+            <textarea id="message" placeholder="Your Message" rows="5"></textarea>
+            <p class="warning" id="messageWarning">⚠️ Please enter a message</p>
+
+            <button type="submit">Send Message</button>
+        </form>
     </section>
 
     <footer>
-        <p>© 2025 Abdullah. All Rights Reserved.</p>
-        <div><a href="#"><i data-lucide="github"></i></a> <a href="#"><i data-lucide="linkedin"></i></a></div>
+        © 2025 Abdullah. All rights reserved.
     </footer>
 
-    <button id="scroll-top" class="scroll-top"><i data-lucide="chevron-up"></i></button>
-
     <script>
-        // THEME TOGGLE
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.body.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
         lucide.createIcons();
-        const toggle = document.getElementById('theme-toggle');
-        function updateIcon() { toggle.innerHTML = ''; const i = document.createElement('i'); i.setAttribute('data-lucide', document.body.dataset.theme === 'light' ? 'moon' : 'sun'); toggle.appendChild(i); lucide.createIcons(); }
-        updateIcon();
-        toggle.addEventListener('click', () => {
-            const newTheme = document.body.dataset.theme === 'light' ? 'dark' : 'light';
-            document.body.dataset.theme = newTheme; localStorage.setItem('theme', newTheme); updateIcon();
-        });
 
-        // TYPING
-        const typing = document.getElementById('typing-text');
+        // Typing animation
+        const typingElement = document.getElementById('typing-text');
         const phrases = ["a Full Stack Developer.", "a Frontend Specialist.", "a Problem Solver."];
-        let pi = 0, ci = 0, del = false;
-        function type() { const cur = phrases[pi]; typing.textContent = cur.slice(0, ci); ci += del ? -1 : 1; if (!del && ci === cur.length) { del = true; setTimeout(type, 1000); } else if (del && ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(type, 400); } else setTimeout(type, del ? 60 : 100); } type();
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
 
-        // SCROLL TOP
-        const scrollTop = document.getElementById('scroll-top');
-        window.addEventListener('scroll', () => scrollTop.classList.toggle('show', window.scrollY > 300));
-        scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            typingElement.textContent = currentPhrase.substring(0, charIndex) + '|';
 
-        // CONTACT FORM (Google Sheets)
-        const form = document.forms['contact-form'];
-        const status = document.getElementById('form-status');
-        form.addEventListener('submit', e => {
+            if (!isDeleting && charIndex < currentPhrase.length) {
+                charIndex++;
+                setTimeout(type, 100);
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                setTimeout(type, 50);
+            } else {
+                isDeleting = !isDeleting;
+                if (!isDeleting) phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 1000);
+            }
+        }
+        type();
+
+        // Contact form validation
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            fetch('https://script.google.com/macros/s/AKfycbxHVbWmsBqQNE6XO23rMVeJ-vdIfRwbtTAFLPlHkwB-99yRGIcOKTM8Enbn9J19ycyMDw/exec', { method: 'POST', body: new FormData(form) })
-                .then(() => { status.textContent = 'Message sent successfully!'; form.reset(); })
-                .catch(() => { status.textContent = 'Error sending message.'; });
-        });
 
-        // GSAP ANIMATIONS
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray(".skill-card, .project-card").forEach(el => {
-            gsap.from(el, { opacity: 0, y: 50, duration: .6, scrollTrigger: { trigger: el, start: "top 80%" } })
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+
+            const nameWarning = document.getElementById('nameWarning');
+            const emailWarning = document.getElementById('emailWarning');
+            const messageWarning = document.getElementById('messageWarning');
+
+            let valid = true;
+
+            // Reset warnings
+            [name, email, message].forEach(input => input.classList.remove('error'));
+            [nameWarning, emailWarning, messageWarning].forEach(w => w.style.display = 'none');
+
+            if (name.value.trim() === '') {
+                name.classList.add('error');
+                nameWarning.style.display = 'block';
+                valid = false;
+            }
+
+            if (email.value.trim() === '' || !email.value.includes('@')) {
+                email.classList.add('error');
+                emailWarning.style.display = 'block';
+                valid = false;
+            }
+
+            if (message.value.trim() === '') {
+                message.classList.add('error');
+                messageWarning.style.display = 'block';
+                valid = false;
+            }
+
+            if (valid) {
+                alert("✅ Message sent successfully!");
+                this.reset();
+            }
         });
     </script>
 </body>
