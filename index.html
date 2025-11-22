@@ -476,7 +476,8 @@
                         <div style="font-weight:800;color:var(--accent-2);font-size:1.1rem">Available for hire</div>
                         <div class="help" style="margin-top:.5rem">Open to remote frontend roles & freelance projects
                         </div>
-                        <a class="btn btn-primary" href="mailto:contactabdullahislam@gmail.com" style="margin-top:.8rem">Say
+                        <a class="btn btn-primary" href="mailto:contactabdullahislam@gmail.com"
+                            style="margin-top:.8rem">Say
                             Hello</a>
                     </div>
                 </aside>
@@ -769,7 +770,7 @@
 
                 // Replace with your deployed Apps Script Web App URL:
                 // Old: Google Apps Script URL
-const ENDPOINT = 'http://localhost/portfolio/contact_submit.php';
+                const ENDPOINT = 'http://localhost/portfolio/contact_submit.php';
 
 
                 // Fetch with timeout
@@ -787,26 +788,21 @@ const ENDPOINT = 'http://localhost/portfolio/contact_submit.php';
                         if (!res.ok) throw new Error('Server responded with ' + res.status);
                         // Some Apps Script return 'Success' plain text, others JSON.
                         const text = await res.text();
-                        // Accept common success responses
-                        if (text && /success/i.test(text)) {
+                        let data;
+                        try {
+                            data = JSON.parse(text);
+                        } catch {
+                            data = null;
+                        }
+
+                        if (data && data.status === 'success') {
                             showToast('✅ Message sent — thank you! I will reply soon.');
                             form.reset();
                         } else {
-                            // try parse JSON
-                            try {
-                                const json = JSON.parse(text);
-                                if (json && (json.status === 'success' || json.ok)) {
-                                    showToast('✅ Message sent — thank you!');
-                                    form.reset();
-                                } else {
-                                    throw new Error('unexpected response');
-                                }
-                            } catch (err) {
-                                // Not JSON or unexpected content — treat as success if includes success keyword
-                                showToast('✅ Message sent — thank you!');
-                                form.reset();
-                            }
+                            showToast('❌ Could not send message. Please try again later.', 'error', 5000);
+                            console.error('Server response:', text);
                         }
+
                     })
                     .catch((err) => {
                         if (err.name === 'AbortError') {
