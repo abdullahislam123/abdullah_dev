@@ -303,35 +303,104 @@
             letter-spacing: 1px;
         }
 
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 5%;
-            }
+        /* --- FULLY RESPONSIVE UPDATES --- */
 
-            .nav-links {
-                display: none;
-            }
+/* 1. Tablet & Large Phones (max-width: 992px) */
+@media (max-width: 992px) {
+    nav {
+        padding: 1.2rem 5%;
+    }
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        gap: 1.5rem;
+    }
+}
 
-            .hero h1 {
-                font-size: 3rem;
-            }
+/* 2. Standard Mobile Phones (max-width: 768px) */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide nav links for cleaner mobile look */
+    }
 
-            .contact-card {
-                padding: 2.5rem;
-            }
+    .hero {
+        padding: 0 20px;
+    }
 
-            .btn-secondary {
-                margin-left: 0;
-                margin-top: 1rem;
-                width: 100%;
-                justify-content: center;
-            }
+    .hero h1 {
+        font-size: 2.8rem; /* Scaled down for mobile */
+        letter-spacing: -1px;
+    }
 
-            .btn-primary {
-                width: 100%;
-                justify-content: center;
-            }
-        }
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    #projects {
+        padding: 60px 5%;
+    }
+
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* Stack projects vertically */
+    }
+
+    .contact-card {
+        padding: 2.5rem 1.5rem;
+        border-radius: 30px;
+    }
+
+    .contact-card h2 {
+        font-size: 1.8rem !important;
+    }
+
+    .cta-buttons {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        gap: 12px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .btn-secondary {
+        margin-left: 0; /* Remove side margin */
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* 3. Small Mobile Phones (max-width: 480px) */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-tag {
+        font-size: 0.65rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+
+    footer {
+        padding: 2.5rem 1rem;
+        font-size: 0.75rem;
+    }
+}
     </style>
 </head>
 
