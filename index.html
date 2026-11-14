@@ -5,6 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdullah | Full-Stack Developer & UI Specialist</title>
+    <meta name="description"
+        content="Portfolio of Abdullah, a Lahore-based full-stack developer building scalable MERN applications, PWAs, and responsive digital experiences.">
+    <meta name="keywords"
+        content="Abdullah Islam, full-stack developer, MERN stack developer, React developer, Node.js developer, PWA developer, Lahore">
+    <meta name="author" content="Abdullah Islam">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#070b19">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Abdullah | Full-Stack Developer & UI Specialist">
+    <meta property="og:description"
+        content="Explore Abdullah's full-stack projects, technical skills, experience, and approach to building thoughtful web products.">
+    <meta property="og:image" content="images/my_pic.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Abdullah | Full-Stack Developer & UI Specialist">
+    <meta name="twitter:description"
+        content="Full-stack developer building scalable web products and responsive user experiences.">
+    <meta name="twitter:image" content="images/my_pic.jpg">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Abdullah Islam",
+            "jobTitle": "Full-Stack Developer",
+            "description": "Full-stack developer building scalable web products and responsive user experiences.",
+            "sameAs": [
+                "https://github.com/abdullahislam123",
+                "https://linkedin.com/in/abdullah-islam-81730b2a1"
+            ],
+            "knowsAbout": [
+                "MERN Stack",
+                "React",
+                "Node.js",
+                "Progressive Web Apps",
+                "Responsive Web Design"
+            ]
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -1294,6 +1331,118 @@
             letter-spacing: 1px;
         }
 
+        /* Visual polish */
+        ::selection {
+            color: #fff;
+            background: rgba(0, 122, 255, 0.75);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        section:not(.hero) {
+            isolation: isolate;
+        }
+
+        section:not(.hero)::before {
+            content: "";
+            position: absolute;
+            inset: 12% 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.16), transparent);
+            pointer-events: none;
+        }
+
+        .hero {
+            background:
+                radial-gradient(circle at 72% 45%, rgba(0, 122, 255, 0.1), transparent 28%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 55%);
+        }
+
+        .hero-text-side {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-name {
+            text-shadow: 0 0 42px rgba(0, 122, 255, 0.18);
+        }
+
+        .hero-title {
+            letter-spacing: -0.5px;
+        }
+
+        .glass-card,
+        .service-card,
+        .project-card,
+        .badge-card,
+        .timeline-content,
+        .edu-card,
+        .github-container {
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        .service-card:hover,
+        .badge-card:hover,
+        .edu-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 242, 254, 0.45);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.28), 0 0 24px rgba(0, 122, 255, 0.12);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .btn,
+        .social-icon-btn,
+        .info-socials a,
+        .nav-links a {
+            will-change: transform;
+        }
+
+        .btn:focus-visible,
+        .social-icon-btn:focus-visible,
+        .info-socials a:focus-visible,
+        .nav-links a:focus-visible {
+            outline-offset: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            section {
+                padding-top: 88px;
+                padding-bottom: 88px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 140px;
+                padding-bottom: 100px;
+            }
+
+            .hero-name {
+                font-size: clamp(2.8rem, 14vw, 4.2rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         /* Responsive Breakpoints */
 
         @media (max-width: 1024px) {
@@ -1471,13 +1620,17 @@
                     <li><span class="bullet-icon">✦</span> PWA Development</li>
                 </ul>
                 <div class="hero-socials">
-                    <a href="https://github.com/abdullahislam123" target="_blank" class="social-icon-btn github"><i
+                    <a href="https://github.com/abdullahislam123" target="_blank" rel="noopener noreferrer"
+                        aria-label="Abdullah on GitHub" class="social-icon-btn github"><i
                             class="devicon-github-original"></i></a>
-                    <a href="https://linkedin.com/in/abdullah-islam-81730b2a1" target="_blank" class="social-icon-btn linkedin"><i
+                    <a href="https://linkedin.com/in/abdullah-islam-81730b2a1" target="_blank" rel="noopener noreferrer"
+                        aria-label="Abdullah on LinkedIn" class="social-icon-btn linkedin"><i
                             class="devicon-linkedin-plain"></i></a>
-                    <a href="mailto:contactabdullahislam@gmail.com" class="social-icon-btn email"><i
+                    <a href="mailto:contactabdullahislam@gmail.com" aria-label="Email Abdullah"
+                        class="social-icon-btn email"><i
                             class="devicon-google-plain"></i></a>
-                    <a href="#" class="social-icon-btn twitter"><i class="devicon-twitter-original"></i></a>
+                    <a href="#" aria-label="Abdullah on Twitter" class="social-icon-btn twitter"><i
+                            class="devicon-twitter-original"></i></a>
                 </div>
                 <div class="hero-ctas">
                     <a href="#projects" class="btn btn-primary">SEE MY WORK</a>
@@ -1491,7 +1644,7 @@
                     <div class="orb-circle orb-yellow"></div>
                     <div class="orb-circle orb-purple"></div>
                     <div class="profile-pic-wrapper">
-                        <img src="images/my_pic.jpg" alt="Abdullah">
+                        <img src="images/my_pic.jpg" alt="Portrait of Abdullah Islam">
                     </div>
                 </div>
             </div>
@@ -1777,13 +1930,13 @@
                                 <p><a href="mailto:contactabdullahislam@gmail.com">contactabdullahislam@gmail.com</a></p>
                             </div>
                         </div>
-                        <div class="info-item">
+                        <!-- <div class="info-item">
                             <span class="info-icon">📞</span>
                             <div class="info-text">
                                 <h5>Phone</h5>
                                 <p>+92-3126073354</p>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="info-item">
                             <span class="info-icon">📍</span>
                             <div class="info-text">
